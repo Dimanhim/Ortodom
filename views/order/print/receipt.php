@@ -125,7 +125,7 @@ if($model->lining_data) $modelLining .= ' ('.$model->lining_data.')';
     </tr>
     </tbody>
 </table>
-<?= $this->render('_receipt_styles') ?>
+
 </body>
 </html>
 
