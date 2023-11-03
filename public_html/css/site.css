@@ -1,0 +1,318 @@
+html,
+body {
+    height: 100%;
+}
+h1 {
+    font-size: 38px;
+}
+.leg-icon {
+    width: 18px;
+}
+.leg-icon.leg-icon-form {
+    width: 25px;
+}
+.wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
+}
+
+.wrap > .container-fluid {
+    padding: 70px 15px 20px;
+}
+.table-order-form {
+
+}
+.front-menu {
+    margin-left: 80px;
+}
+.table-order-form.table > tbody > tr > td {
+    border: none;
+}
+.table-order-form.table > tbody > tr > td.table-order-arrow {
+    vertical-align: middle;
+    text-align: center;
+}
+.ready-model-photo {
+    width: 500px;
+    min-height: 100px;
+    box-shadow: 1px 1px 3px #ccc, -1px, -1px 3px #ccc;
+}
+.ready-model-photo img {
+    width: 100%;
+}
+.footer {
+    height: 60px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.jumbotron {
+    text-align: center;
+    background-color: transparent;
+}
+
+.jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+}
+
+.not-set {
+    color: #c55;
+    font-style: italic;
+}
+.sms-yandex-review {
+    display: none;
+}
+.sms-yandex-review.showed {
+    display: block;
+}
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: 5px;
+}
+
+a.asc:after {
+    content: /*"\e113"*/ "\e151";
+}
+
+a.desc:after {
+    content: /*"\e114"*/ "\e152";
+}
+
+.sort-numerical a.asc:after {
+    content: "\e153";
+}
+
+.sort-numerical a.desc:after {
+    content: "\e154";
+}
+
+.sort-ordinal a.asc:after {
+    content: "\e155";
+}
+
+.sort-ordinal a.desc:after {
+    content: "\e156";
+}
+
+.grid-view th {
+    white-space: nowrap;
+}
+
+.hint-block {
+    display: block;
+    margin-top: 5px;
+    color: #999;
+}
+
+.error-summary {
+    color: #a94442;
+    background: #fdf7f7;
+    border-left: 3px solid #eed3d7;
+    padding: 10px 20px;
+    margin: 0 0 15px 0;
+}
+.todaydate {
+    border: 1px solid #f00 !important;
+}
+.more {
+    page-break-after: always;
+}
+.barcode-container {
+    position: relative;
+}
+.barcode-numbers {
+    /*position: absolute;*/
+    margin-left: 8px;
+    font-size: 18px;
+    letter-spacing: 10px;
+}
+.background-f2 {
+    background-color: #f2f2f2;
+}
+.table-order-arrow a {
+    font-size: 24px;
+}
+.table-order-arrow.table-order-arrow-full {
+    padding-top: 20px;
+}
+.table-order-arrow.table-order-arrow-short {
+    padding-top: 0;
+}
+.ul-list {
+    padding-left: 0;
+}
+.ul-list li {
+    list-style: none;
+}
+.photo-list {
+    overflow: hidden;
+    padding: 5px;
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+}
+.photo-list div {
+    margin-right: 10px;
+}
+.photo-list-btns {
+    margin-top: 5px;
+    text-align: center;
+}
+.circle-colored {
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+}
+
+.circle-color-table tr td {
+    vertical-align: middle;
+}
+.visit-user-table tr td {
+    width: 100px;
+    min-width: 100px;
+}
+.visit-user-table tr td a {
+    text-decoration: none;
+    color: inherit;
+}
+.visit-user-table .my-cell {
+    background: #aef7ae !important;
+}
+.visit-user-table .cell-disabled {
+    background: #f7bda8 !important;
+}
+.pale-yellow {
+    background: #f7f394 !important;
+}
+.pale-gray {
+    background: #aaaaaa !important;
+}
+.pale-green {
+    background: #aef7ae !important;
+}
+.pale-red {
+    background: #f7bda8 !important;
+}
+.pale-blue {
+    background: #c2c6f7 !important;
+}
+.pale-orange {
+    background: #fbce8f !important;
+}
+.date-change-buttons a.btn {
+    min-width: 60px;
+    height: 50px;
+    font-size: 20px;
+    padding-top: 10px;
+}
+.date-change-buttons a.btn.btn-text {
+    min-width: 190px;
+}
+@media print {
+    .more {
+        page-break-after: always;
+    }
+}
+    /* align the logout "link" (button in form) of the navbar */
+.nav li > form > button.logout {
+    padding: 15px;
+    border: none;
+}
+.review-radio-btns > label > input[type="radio"] {
+    margin-left: 30px;
+}
+.review-radio-btns > label:first-child > input[type="radio"] {
+    margin-left: 0;
+}
+.table-visit th, .table-visit td {
+    text-align: center;
+}
+.table-visit th {
+    background: #eee;
+}
+.table-visit td {
+    background: #70b603;
+}
+#show-modal button.close {
+    position: relative;
+    right: 10px;
+    top: 10px;
+    z-index: 999;
+}
+td.td-avalible, td.td-record-avalible, td.td-disabled {
+    cursor: pointer;
+}
+.table-visit td.disabled-cell {
+    background: #f00;
+    color: #fff;
+}
+.ui-autocomplete {
+    z-index: 1100;
+}
+.error {
+    color: #f00;
+    display: none;
+}
+form.marked .required .control-label:after,
+form.marked label.mark-this:after,
+form.marked label[for="visit-patient_id"]:after
+{
+    content: " *";
+    color: #e9573f;
+}
+
+form.marked .required .no-mark-here .control-label:after{
+    content: "" !important;
+}
+/*.outfit-btn {
+    display: none;
+}*/
+
+.outfit-container {
+    width: 100%;
+    /*border: 1px solid #ddd;*/
+    padding: 20px;
+}
+.table-outfit th, .table-outfit td {
+    text-align: center;
+}
+
+@media(max-width:767px) {
+    .nav li > form > button.logout {
+        display:block;
+        text-align: left;
+        width: 100%;
+        padding: 10px 15px;
+    }
+}
+@media(max-width:991px) {
+    /*.date-change-buttons-container {
+        text-align: center;
+    }*/
+    /*.date-change-buttons {
+        margin-top: 20px;
+        float: none !important;
+    }*/
+}
+
+.nav > li > form > button.logout:focus,
+.nav > li > form > button.logout:hover {
+    text-decoration: none;
+}
+
+.nav > li > form > button.logout:focus {
+    outline: none;
+}
