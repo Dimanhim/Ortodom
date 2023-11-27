@@ -7,7 +7,7 @@ $this->registerCssFile('https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/boot
         <div class="modal-content" style="height: 100%;">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <div class="modal-body" style="height: 100%;">
-                <iframe src="http://crm.ortodom-spb.ru/record" frameborder="0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 999;"></iframe>
+                <iframe src="https://crm.ortodom-spb.ru/record" frameborder="0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 999;"></iframe>
             </div>
         </div>
     </div>

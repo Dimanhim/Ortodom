@@ -53,7 +53,7 @@ $count = 1;
             </tr>
         <?php endif; ?>
     </table>
-    <?= $this->render('operation-list', ['orders' => $orders]) ?>
+    <?//= $this->render('operation-list', ['orders' => $orders]) ?>
 </div>
 <style>
     h2 {

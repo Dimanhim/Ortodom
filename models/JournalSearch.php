@@ -192,6 +192,7 @@ class JournalSearch extends Order
             ->andFilterWhere(['like', 'model', $this->model])
             ->andFilterWhere(['like', 'model', $this->brand_id])
             ->andFilterWhere(['like', 'color', $this->color])
+            ->andFilterWhere(['like', 'color_id', $this->color_id])
             ->andFilterWhere(['like', 'size', $this->size]);
 
         return $dataProvider;
