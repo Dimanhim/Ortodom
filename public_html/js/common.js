@@ -65,7 +65,7 @@ if($('.image-preview-container-o').length) {
 
 
 
-$('body').on('click', '.td-avalible', function(e) {
+$('body').on('click', '.td-avalible:not(.td-avalible input)', function(e) {
     /*
     e.preventDefault();
     var time = $(this).data('time');
@@ -79,40 +79,79 @@ $('body').on('click', '.td-avalible', function(e) {
     $('#visitModal').modal('show');
     getSelectTime();
 */
-    e.preventDefault();
-    var time = $(this).data('time');
-    var date = $(this).data('date');
-    var url, record;
 
-    if($(this).hasClass('td-record-avalible')) {
-        url = '/record/show-modal';
-        record = true;
-    }
-    else {
-        url = '/visit/show-modal';
-        record = false;
-    }
-    $.get(url, {date: date, time: time}, function(res) {
-        $('#show-modal-container').html(res);
-        $('#show-modal').modal('show');
-        $(".date-picker").datepicker({
-            language: "ru-RU",
-            changeMonth: true,
-            changeYear: true,
-            format: "dd.mm.yyyy",
+    var target = e.target;
+    if(!$(target).is('input')) {
+        e.preventDefault();
+        var time = $(this).data('time');
+        var date = $(this).data('date');
+        var url, record;
 
-        }).on('changeDate', function(e) {
-            getSelectTime(false, record);
+        if($(this).hasClass('td-record-avalible')) {
+            url = '/record/show-modal';
+            record = true;
+        }
+        else {
+            url = '/visit/show-modal';
+            record = false;
+        }
+        $.get(url, {date: date, time: time}, function(res) {
+            $('#show-modal-container').html(res);
+            $('#show-modal').modal('show');
+            $(".date-picker").datepicker({
+                language: "ru-RU",
+                changeMonth: true,
+                changeYear: true,
+                format: "dd.mm.yyyy",
+
+            }).on('changeDate', function(e) {
+                getSelectTime(false, record);
+            });
+            $(".phone-mask").inputmask({"mask": "+7-999-999-99-99"});
+            $('#time-value').html(time);
+            $('#date-value').html(date);
+            $('#visit-visit_date').val(date);
+            $('.chosen').chosen();
+            getSelectTime(time, record);
         });
-        $(".phone-mask").inputmask({"mask": "+7-999-999-99-99"});
-        $('#time-value').html(time);
-        $('#date-value').html(date);
-        $('#visit-visit_date').val(date);
-        $('.chosen').chosen();
-        getSelectTime(time, record);
-    });
+    }
+
 });
-$('body').on('click', '.td-disabled', function(e) {
+
+$('body').on('click', '.btn-reserve', function(e) {
+    e.preventDefault();
+    let checkboxes = $('input.reserved-checkbox');
+    let checkbox_values = [];
+    checkboxes.each(function(index, element) {
+        let el = $(element);
+        if(el.is(':checked')) {
+            checkbox_values.push({
+                date: el.attr('data-date'),
+                time: el.attr('data-time')
+            });
+        }
+    })
+    console.log('checkbox_values', checkbox_values)
+    if(checkbox_values.length) {
+        if(confirm('Вы действительно хотите забронировать ячейки?')) {
+            $.ajax({
+                url: '/visit/reserve-cells',
+                type: 'POST',
+                data: {data: checkbox_values},
+                success: function (res) {
+                    console.log('res', res)
+                    if(res.result == 1) {
+                        window.location.reload();
+                    }
+                },
+                error: function () {
+                    alert('Произошла ошибка бронирования!');
+                }
+            });
+        }
+    }
+});
+$('body').on('click', '.td-disabled, .td-reserved', function(e) {
     e.preventDefault();
     var id = $(this).data('id');
     var time = $(this).data('time');
@@ -134,6 +173,26 @@ $('body').on('click', '.td-disabled', function(e) {
         $('#visit-address').removeAttr('readonly');
         $('#visit-birthday').removeAttr('readonly');
         $('#visit-passport_data').removeAttr('readonly');
+    });
+});
+$('body').on('change', '#visit-phone', function(e) {
+    e.preventDefault();
+    let self = $(this)
+    $.ajax({
+        url: '/visit/user-by-phone',
+        type: 'POST',
+        data: {phone: self.val()},
+        success: function (res) {
+            console.log('response phone change', res)
+            if(res.result == 1 && res.id) {
+                $('#visit-patient_id').val(res.id);
+                $('#visit-name').val(res.name);
+
+            }
+        },
+        error: function () {
+            alert('Error!');
+        }
     });
 });
 /*$('body').on('submit', '#form-visit-modal', function(e) {

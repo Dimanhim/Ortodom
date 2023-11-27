@@ -29,4 +29,9 @@ class Helpers
             return ' background-f2';
         return '';
     }
+
+    public static function formatPhone1($phone)
+    {
+
+    }
 }

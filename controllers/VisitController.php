@@ -162,6 +162,7 @@ class VisitController extends Controller
                     $new_model->phone = $model->phone;
                     $new_model->visit_date = strtotime($model->visit_date);
                     $new_model->visit_time = Calendar::getSecondsInTime($model->visit_time);
+                    $new_model->reserved = $model->reserved;
                     if($new_model->save()) {
                         $new_model->sendMessage();
                         Yii::$app->session->setFlash('success', 'Сохранено успешно');
@@ -181,6 +182,7 @@ class VisitController extends Controller
                     $new_model->phone = $patient->phone;
                     $new_model->visit_date = strtotime($model->visit_date);
                     $new_model->visit_time = Calendar::getSecondsInTime($model->visit_time);
+                    $new_model->reserved = $model->reserved;
                     if($new_model->save()) {
                         $new_model->sendMessage();
                         Yii::$app->session->setFlash('success', 'Сохранено успешно');
@@ -318,6 +320,70 @@ class VisitController extends Controller
         $weekNumber = Visit::getFreeWeek();
 
         return $weekNumber ? $this->redirect(['/visit?week='.$weekNumber]) : $this->redirect(['/visit']);
+    }
+
+    public function actionReserveCells()
+    {
+        $response = [
+            'result' => 0,
+            'message' => null,
+        ];
+        $saved_count = 0;
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if(Yii::$app->request->isAjax) {
+            if($reserved_cells = Yii::$app->request->post('data')) {
+                foreach($reserved_cells as $reserved_cell) {
+                    $visit = new Visit();
+                    $visit->name = 'Резерв';
+                    $visit->phone = '+79999999999';
+                    $visit->visit_date = $reserved_cell['date'];
+                    $visit->visit_time = Calendar::getSecondsInTime($reserved_cell['time']);
+                    $visit->reserved = 1;
+                    if($visit->save()) {
+                        $saved_count++;
+                    }
+                }
+            }
+            if($saved_count) {
+                $response['message'] = 'Забронировано '.$saved_count.' ячеек';
+                $response['result'] = 1;
+                Yii::$app->session->setFlash('success', $response['message']);
+            }
+            return $response;
+        }
+    }
+
+    public function actionUserByPhone()
+    {
+        $response = [
+            'result' => 0,
+            'id' => null,
+            'name' => null,
+        ];
+        $saved_count = 0;
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if(Yii::$app->request->isAjax) {
+            if($phone = Yii::$app->request->post('phone')) {
+                \Yii::$app->infoLog->add('phone', $phone);
+                $phones = [
+                    'phone_1' => $phone,
+                    'phone_2' => $phone,
+                    'phone_3' => $phone,
+                ];
+                foreach($phones as $phoneNumber) {
+                    if($patient = Patient::findOne(['phone' => $phoneNumber])) {
+                        break;
+                    }
+                }
+                if($patient) {
+                    $response['id'] = $patient->id;
+                    $response['name'] = $patient->full_name;
+                    $response['result'] = 1;
+                }
+
+            }
+            return $response;
+        }
     }
 }
 

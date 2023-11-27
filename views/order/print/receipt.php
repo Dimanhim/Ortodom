@@ -33,6 +33,10 @@ $acceptTime = strtotime($model->accepted);
             padding: 15px 20px;
             border: 1px solid #d43f3a;
             color: #d43f3a;
+            margin-top: 50px;
+        }
+        .pr-requisites {
+            font-size: 12pt;
         }
     </style>
 </head>
@@ -44,12 +48,19 @@ $acceptTime = strtotime($model->accepted);
         <td><img src="/images/ortodom.png" width="317" height="120"></td>
         <td>
             <div style="text-align:right;">
-                <p>«ОртоДом»<br/>
-                    Тел +7 (812) 934-4554, Факс +7 (812) 388 17 10<br/>
+                <p class="pr-requisites">
+                    «ОртоДом»
+                    <br/>
+                    Тел 8(800) 222-7002
+                    <!--
+                    Тел +7 (812) 934-4554
+                    , Факс +7 (812) 388 17 10-->
+                    <br/>
                     ИНН/КПП 7814494217/781001001<br/>
                     Aдрес 196084, г. Санкт-Петербург,<br/>
                     ул. Цветочная, д.6, лит. Д 4 этаж, пом.1Н<br/>
-                    Email <a href="mailto:shoes@list.ru">shoes@list.ru</a></p>
+                    Email <a href="mailto:shoes@list.ru">shoes@list.ru</a>
+                </p>
             </div>
         </td>
     </tr>

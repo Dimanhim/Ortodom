@@ -127,9 +127,23 @@ class Calendar extends Model
             foreach($visits as $key => $visit) {
                 $result[$key]['time'] = ($visit->visit_time == self::getSecondsInTime('19:30')) ? self::getSecondsInTime('19:15') : $visit->visit_time;
                 $result[$key]['date'] = $visit->visit_date;
+                $result[$key]['reserved'] = $visit->reserved;
             }
         }
         return $result;
+    }
+    public function statusCell($actual_date, $time, $date)
+    {
+        //$disabled_times = [46800, 48600];
+        $disabled_times = [50400, 52200];
+        $time = $this->getSecondsInTime($time);
+        $disabled_cells = $this->getDisabledCells($actual_date, Visit::SHOW_DAYS_RECORDS);
+        foreach($disabled_cells as $val) {
+            if((($val['date'] == $date) && ($val['time'] == $time)) || (in_array($time, $disabled_times))) {
+                return $val['reserved'] ? Visit::STATUS_CELL_RESERVED : Visit::STATUS_CELL_DISABLED;
+            }
+        }
+        return Visit::STATUS_CELL_AVALIABLE;
     }
     public function cellDisabled($actual_date, $time, $date)
     {

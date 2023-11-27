@@ -21,6 +21,10 @@ class Visit extends \yii\db\ActiveRecord
     const SHOW_DAYS = 5;
     const SHOW_DAYS_RECORDS = 14;
 
+    const STATUS_CELL_AVALIABLE    = 1;
+    const STATUS_CELL_DISABLED     = 2;
+    const STATUS_CELL_RESERVED     = 3;
+
     public $birthday;
     public $address;
     public $passport_data;
@@ -57,7 +61,7 @@ class Visit extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'phone', 'visit_date', 'visit_time'], 'required'],
-            [['patient_id', 'send_reminder_sms', 'send_reminder_day_sms'], 'integer'],
+            [['patient_id', 'send_reminder_sms', 'send_reminder_day_sms', 'reserved'], 'integer'],
             [['name', 'phone'], 'string', 'max' => 255],
             [['visit_date', 'visit_time', 'birthday', 'address', 'passport_data', 'model_id', 'created_at', 'updated_at'], 'safe'],
         ];
@@ -69,7 +73,6 @@ class Visit extends \yii\db\ActiveRecord
 
     public function beforeSave($insert)
     {
-        file_put_contents('info-log.txt', date('d.m.Y H:i:s').' $insert - '.print_r($insert, true)."\n", FILE_APPEND);
         if($insert and self::find()->where(['visit_date' => $this->visit_date, 'visit_time' => $this->visit_time])->exists()) return false;
         return parent::beforeSave($insert);
     }
@@ -89,6 +92,7 @@ class Visit extends \yii\db\ActiveRecord
             'visit_date' => 'Дата',
             'visit_time' => 'Время',
             'patient_id' => 'Пациент',
+            'reserved' => 'Бронь',
             'send_reminder_sms' => 'Смс с напоминанием',
             'send_reminder_day_sms' => 'Смс с напоминанием за сутки',
         ];

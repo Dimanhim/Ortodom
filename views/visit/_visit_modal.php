@@ -56,6 +56,11 @@ use app\models\Patient;
                     <div class="form-group">
                         <p class="error"></p>
                     </div>
+                    <?php if(!Yii::$app->user->isGuest) : ?>
+                    <div class="form-group">
+                        <?= $form->field($model, 'reserved')->checkbox() ?>
+                    </div>
+                    <?php endif; ?>
                     <?//= $form->field($model, 'visit_date', ['template' => '{input}'])->hiddenInput() ?>
                     <?//= $form->field($model, 'visit_time', ['template' => '{input}'])->hiddenInput() ?>
                     <?= $form->field($model, 'model_id', ['template' => '{input}'])->hiddenInput(['value' => $model->id]) ?>

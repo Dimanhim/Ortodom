@@ -12,6 +12,9 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'l8YSwkCg3dWR-AWvDVDJGcZpjLnbO-yO',
         ],
+        'infoLog' => [
+            'class' => 'app\components\InfoLog',
+        ],
         'assetManager' => [
             'bundles' => [
                 /*'yii\bootstrap\BootstrapAsset' => [

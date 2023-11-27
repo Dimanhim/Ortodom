@@ -252,11 +252,15 @@ a.desc:after {
     top: 10px;
     z-index: 999;
 }
-td.td-avalible, td.td-record-avalible, td.td-disabled {
+td.td-avalible, td.td-record-avalible, td.td-disabled, td.td-reserved {
     cursor: pointer;
 }
 .table-visit td.disabled-cell {
     background: #f00;
+    color: #fff;
+}
+.table-visit td.td-reserved {
+    background: #f0ad4e;
     color: #fff;
 }
 .ui-autocomplete {
@@ -265,6 +269,12 @@ td.td-avalible, td.td-record-avalible, td.td-disabled {
 .error {
     color: #f00;
     display: none;
+}
+.btn-for-finger {
+    width: 50px;
+    height: 50px;
+    padding: 12px;
+    font-size: 20px;
 }
 form.marked .required .control-label:after,
 form.marked label.mark-this:after,
@@ -289,7 +299,15 @@ form.marked .required .no-mark-here .control-label:after{
 .table-outfit th, .table-outfit td {
     text-align: center;
 }
-
+.cell-content-container {
+    position: relative;
+    height: 100%
+}
+.cell-content-checkbox {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+}
 @media(max-width:767px) {
     .nav li > form > button.logout {
         display:block;
