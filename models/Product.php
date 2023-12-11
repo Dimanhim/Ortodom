@@ -127,10 +127,7 @@ class Product extends BasePage
         $page->is_active = 1;
         $page->parent_id = $brand->setAgeGroup();
         if(!$page->save()) {
-            echo "<pre>";
-            print_r($page->errors);
-            echo "</pre>";
-            exit;
+            Yii::info($page->errors);
         }
     }
     public function getImagePath()

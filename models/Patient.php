@@ -26,12 +26,12 @@ namespace app\models;
 class Patient extends \yii\db\ActiveRecord
 {
     // true - не создавать заказ
-    public $insert_order;
+    public $insert_order = false;
 
-    public function __construct($insert_order = false)
+    /*public function __construct($insert_order = false)
     {
         $this->insert_order = $insert_order;
-    }
+    }*/
     /**
      * {@inheritdoc}
      */
