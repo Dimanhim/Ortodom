@@ -353,37 +353,6 @@ class VisitController extends Controller
         }
     }
 
-    public function actionUserByPhone()
-    {
-        $response = [
-            'result' => 0,
-            'id' => null,
-            'name' => null,
-        ];
-        $saved_count = 0;
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        if(Yii::$app->request->isAjax) {
-            if($phone = Yii::$app->request->post('phone')) {
-                \Yii::$app->infoLog->add('phone', $phone);
-                $phones = [
-                    'phone_1' => $phone,
-                    'phone_2' => $phone,
-                    'phone_3' => $phone,
-                ];
-                foreach($phones as $phoneNumber) {
-                    if($patient = Patient::findOne(['phone' => $phoneNumber])) {
-                        break;
-                    }
-                }
-                if($patient) {
-                    $response['id'] = $patient->id;
-                    $response['name'] = $patient->full_name;
-                    $response['result'] = 1;
-                }
 
-            }
-            return $response;
-        }
-    }
 }
 

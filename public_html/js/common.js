@@ -179,7 +179,7 @@ $('body').on('change', '#visit-phone', function(e) {
     e.preventDefault();
     let self = $(this)
     $.ajax({
-        url: '/visit/user-by-phone',
+        url: '/record/user-by-phone',
         type: 'POST',
         data: {phone: self.val()},
         success: function (res) {

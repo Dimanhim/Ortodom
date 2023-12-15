@@ -7,6 +7,7 @@ use app\models\Visit;
 use Yii;
 use yii\web\Controller;
 use app\components\Calendar;
+use yii\web\Response;
 
 /**
  * OrderController implements the CRUD actions for Visit model.
@@ -113,6 +114,9 @@ class RecordController extends Controller
                     if($new_model->save()) {
                         Yii::$app->session->setFlash('success', 'Сохранено успешно');
                     }
+                    else {
+                        Yii::info($new_model->errors);
+                    }
                 }
             } else {
                 $patient = new Patient(true);
@@ -131,12 +135,49 @@ class RecordController extends Controller
                     if($new_model->save()) {
                         Yii::$app->session->setFlash('success', 'Сохранено успешно');
                     }
+                    else {
+                        Yii::info($new_model->errors);
+                    }
                 }
             }
             $new_model->sendMessage();
             return $this->redirect(['record/success', 'visit_date' => $new_model->visit_date, 'visit_time' => $new_model->visit_time]);
         }
     }
+
+    public function actionUserByPhone()
+    {
+        $response = [
+            'result' => 0,
+            'id' => null,
+            'name' => null,
+        ];
+        $saved_count = 0;
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if(Yii::$app->request->isAjax) {
+            if($phone = Yii::$app->request->post('phone')) {
+                \Yii::$app->infoLog->add('phone', $phone);
+                $phones = [
+                    'phone_1' => $phone,
+                    'phone_2' => $phone,
+                    'phone_3' => $phone,
+                ];
+                foreach($phones as $phoneNumber) {
+                    if($patient = Patient::findOne(['phone' => $phoneNumber])) {
+                        break;
+                    }
+                }
+                if($patient) {
+                    $response['id'] = $patient->id;
+                    $response['name'] = $patient->full_name;
+                    $response['result'] = 1;
+                }
+
+            }
+            return $response;
+        }
+    }
+
     public function actionSuccess($visit_date, $visit_time)
     {
         return $this->render('success', [
