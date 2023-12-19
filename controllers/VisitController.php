@@ -70,6 +70,7 @@ class VisitController extends Controller
                 if($model->save()) {
                     if(!$model->patient_id) {
                         $patient = new Patient();
+                        $patient->insert_order = true;
                         $patient->full_name = $model->name;
                         $patient->birthday = '---';
                         $patient->address = '---';
@@ -170,6 +171,7 @@ class VisitController extends Controller
                 }
             } else {
                 $patient = new Patient(true);
+                $patient->insert_order = true;
                 $patient->full_name = $model->name;
                 $patient->phone = $model->phone;
                 $patient->birthday = $format_date ? $format_date : date('Y-m-d');

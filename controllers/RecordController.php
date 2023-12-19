@@ -120,6 +120,7 @@ class RecordController extends Controller
                 }
             } else {
                 $patient = new Patient(true);
+                $patient->insert_order = true;
                 $patient->full_name = $model->name;
                 $patient->phone = $model->phone;
                 $patient->birthday = $format_date ? $format_date : date('Y-m-d');
