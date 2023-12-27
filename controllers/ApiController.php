@@ -247,20 +247,20 @@ class ApiController extends Controller
      */
     public function actionCronRemainderReadySms()
     {
-        return true;
+        //return true;
         $orderIds = [];
 
         // день, когда должен был измениться статус
-        $today = strtotime(date('d.m.Y')) - 86400 * 7;
+        $today = strtotime(date('d.m.Y')) - 86400 * 3;
         $orderStatusDates = OrderStatusDate::find()
             ->joinWith('order')
             // дата создания в день неделей ранее
-            ->where(['between', 'created_at', $today, $today + 86399])
+            ->where(['between', 'order_status_dates.created_at', $today, $today + 86399])
             // статус Готов к выдаче
             ->andWhere(['order_status_dates.status_id' => 3])
             ->andWhere(['orders.status_id' => 3])
             //->andWhere('orders.status_date = order_status_dates.created_at')
-            ->orderBy(['order_id' => SORT_ASC])
+            ->orderBy(['order_status_dates.order_id' => SORT_ASC])
             ->all();
 
         if($orderStatusDates) {
@@ -269,7 +269,7 @@ class ApiController extends Controller
                 if($statusDates = $orderStatusDate->order->statusDates) {
                     foreach($statusDates as $statusDate) {
                         if($statusDate->created_at == $orderStatusDate->order->status_date) {
-                            //echo ' --- status_id='.$statusDate->status_id.' '.date('d.m.Y H:i:s', $statusDate->created_at).' status_date='.date('d.m.Y H:i:s',$orderStatusDate->order->status_date).' order_status_id='.$statusDate->order->status_id.'<br>';
+                            //echo 'order_id - '.$statusDate->order_id.' --- status_id='.$statusDate->status_id.' '.date('d.m.Y H:i:s', $statusDate->created_at).' status_date='.date('d.m.Y H:i:s',$orderStatusDate->order->status_date).' order_status_id='.$statusDate->order->status_id.'<br>';
                             $orderIds[] = $orderStatusDate->order->id;
                         }
 
