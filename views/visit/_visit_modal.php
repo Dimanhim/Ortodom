@@ -16,16 +16,19 @@ use app\models\Patient;
                     </div>
 
                     <?php $form = ActiveForm::begin(['id' => 'form-visit-modal', 'action' => '/visit/save-modal', 'options' => ['class' => 'marked']]) ?>
-                    <?= $form->field($model, 'patient_id')->dropDownList(ArrayHelper::map(Patient::find()->all(), 'id', 'full_name'), ['prompt' => '--Выбрать--', 'required' => 'required', 'class' => 'form-control chosen']) ?>
+                    <?//= $form->field($model, 'patient_id')->dropDownList(ArrayHelper::map(Patient::find()->all(), 'id', 'full_name'), ['prompt' => '--Выбрать--', 'required' => 'required', 'class' => 'form-control chosen']) ?>
+                    <?= $form->field($model, 'patient_id', ['template' => '{input}'])->hiddenInput(['value' => $model->patient_id]) ?>
+                    <!--
                     <div class="form-group">
                         <b><a href="#" id="visit-create-client">или создайте нового</a></b>
                     </div>
+                    -->
                     <div class="row">
                         <div class="col-md-6">
-                            <?= $form->field($model, 'name')->textInput(['required' => 'required', 'readonly' => true]) ?>
+                            <?= $form->field($model, 'name')->textInput(['required' => 'required']) ?>
                         </div>
                         <div class="col-md-6">
-                            <?= $form->field($model, 'phone')->textInput(['class' => 'form-control phone-mask', 'required' => 'required', 'readonly' => true]) ?>
+                            <?= $form->field($model, 'phone')->textInput(['class' => 'form-control phone-mask', 'required' => 'required']) ?>
                         </div>
                     </div>
                     <!--

@@ -2,13 +2,13 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Наряд готов к отправке';
+$this->title = 'Накладная (готовы к отправке)';
 $count = 1;
 ?>
 <div class="outfit-container">
     <div class="row">
         <div class="col-md-6">
-            <h2><?= Html::encode($this->title) ?></h2>
+            <h2 style="white-space: nowrap"><?= Html::encode($this->title) ?></h2>
         </div>
         <div class="col-md-6">
             <div class="pull-right">
@@ -17,11 +17,11 @@ $count = 1;
         </div>
     </div>
 
-    <table class="table table-bordered table-outfit">
+    <table class="table table-bordered table-outfit table-cm">
         <tr>
-            <th>№ п/п</th>
-            <th>ФИО</th>
-            <th>Номер заказа и ШК</th>
+            <th class="cm-1-5">№ п/п</th>
+            <th class="cm-9-0">ФИО</th>
+            <th class="cm-7-5">ШК</th>
         </tr>
         <?php if($orders) : ?>
             <?php foreach($orders as $order) : ?>
@@ -30,19 +30,16 @@ $count = 1;
                         <?= $count ?>
                     </td>
                     <td>
-                        <?= $order->patient ? $order->patient->full_name : '---' ?>
+                        <div>
+                            <?= $order->patient ? $order->patient->full_name : '---' ?>
+                        </div>
+                        <div>
+                            <strong><?= $order->id ?></strong>
+                        </div>
+
                     </td>
                     <td>
-                        <table style="width: 100%;">
-                            <tr>
-                                <td>
-                                    <?= $order->getBarcodeView() ?>
-                                </td>
-                                <td style="text-align: left; font-size: 24px; margin-top: 15px;">
-                                    <strong><?= $order->id ?></strong>
-                                </td>
-                            </tr>
-                        </table>
+                        <?= $order->getBarcodeView() ?>
                     </td>
                 </tr>
                 <?php $count++ ?>
@@ -58,5 +55,23 @@ $count = 1;
 <style>
     h2 {
         margin-top: 0;
+    }
+    .cm-1-5 {
+        min-width: 1.5cm;
+        max-width: 1.5cm;
+        width: 1.5cm;
+    }
+    .cm-7-5 {
+        min-width: 7.5cm;
+        max-width: 7.5cm;
+        width: 7.5cm;
+    }
+    .cm-9-0 {
+        min-width: 9.0cm;
+        max-width: 9.0cm;
+        width: 9.0cm;
+    }
+    .table-cm {
+        /*width: 18cm !important;*/
     }
 </style>

@@ -175,26 +175,38 @@ $('body').on('click', '.td-disabled, .td-reserved', function(e) {
         $('#visit-passport_data').removeAttr('readonly');
     });
 });
-$('body').on('change', '#visit-phone', function(e) {
+$('body').on('keyup', '#visit-phone', function(e) {
     e.preventDefault();
     let self = $(this)
-    $.ajax({
-        url: '/record/user-by-phone',
-        type: 'POST',
-        data: {phone: self.val()},
-        success: function (res) {
-            console.log('response phone change', res)
-            if(res.result == 1 && res.id) {
-                $('#visit-patient_id').val(res.id);
-                $('#visit-name').val(res.name);
-
+    let phone = self.val();
+    let regex = /^\+7-[\d]{3}-[\d]{3}-[\d]{2}-[\d]{2}$/;
+    if(regex.test(phone)) {
+        console.log('regex', phone)
+        $.ajax({
+            url: '/record/user-by-phone',
+            type: 'POST',
+            data: {phone: phone},
+            success: function (res) {
+                $('#visit-name').val('');
+                if(res.result == 1 && res.id && res.name) {
+                    $('#visit-patient_id').val(res.id);
+                    $('#visit-name').val(res.name);
+                    //$('.chosen').trigger('chosen:updated');
+                }
+                else {
+                    alert('Пациент не найден, необходимо заполнить поле ФИО')
+                    $('#visit-name').trigger('focus');
+                }
+            },
+            error: function () {
+                alert('Error!');
             }
-        },
-        error: function () {
-            alert('Error!');
-        }
-    });
+        });
+    }
 });
+function fillPatientFio(name) {
+
+}
 /*$('body').on('submit', '#form-visit-modal', function(e) {
     e.preventDefault();
     var form = $(this);
