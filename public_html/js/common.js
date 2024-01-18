@@ -748,6 +748,23 @@ if($(window).width() > 991) {
     yandex_nav.attr('href', map);
 }
 
+$(document).on('change', '#patient-problem', function(e) {
+    e.preventDefault();
+    displayProblemData()
+});
+
+function displayProblemData() {
+    let data_container = $('#patient-problem_data-container');
+    let checkbox = $('#patient-problem');
+
+    if(checkbox.is(':checked')) {
+        data_container.css('display', 'block')
+    }
+    else {
+        data_container.css('display', 'none')
+    }
+}
+displayProblemData()
 
 
 

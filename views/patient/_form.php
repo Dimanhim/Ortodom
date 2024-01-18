@@ -41,9 +41,16 @@ use yii\jui\DatePicker;
 
     <?php echo $form->field($model, 'phone')->textInput(['maxlength' => true, 'class' => 'form-control phone-mask']); ?>
 
-    <?php echo $form->field($model, 'passport_data')->textarea(['rows' => 6]); ?>
+    <?php echo $form->field($model, 'passport_data')->textarea(['rows' => 2]); ?>
 
-    <?php echo $form->field($model, 'problem')->checkbox(); ?>
+    <div class="row">
+        <div class="col-md-2">
+            <?php echo $form->field($model, 'problem')->checkbox(); ?>
+        </div>
+        <div class="col-md-10" id="patient-problem_data-container">
+            <?php echo $form->field($model, 'problem_data')->textarea(['rows' => 2]); ?>
+        </div>
+    </div>
 
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? 'Добавить' : 'Сохранить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']); ?>

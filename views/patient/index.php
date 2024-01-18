@@ -67,6 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 [
                     'attribute' => 'full_name',
+                    'format' => 'raw',
                     'value' => function($data) {
                         return $data->fullName;
                     }

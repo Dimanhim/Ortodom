@@ -50,7 +50,7 @@ class Patient extends \yii\db\ActiveRecord
         return [
             [['full_name', 'birthday', 'address', 'phone', 'passport_data'], 'required'],
             [['birthday'], 'safe'],
-            [['passport_data'], 'string'],
+            [['passport_data', 'problem_data'], 'string'],
             [['created_at', 'problem'], 'integer'],
             [['full_name', 'address', 'phone'], 'string', 'max' => 255],
         ];
@@ -69,6 +69,7 @@ class Patient extends \yii\db\ActiveRecord
             'phone' => 'Телефон',
             'passport_data' => 'Паспортные данные пациента (представителя)',
             'problem' => 'Проблемный пациент',
+            'problem_data' => 'Особые отметки',
             'created_at' => 'Добавлен',
         ];
     }

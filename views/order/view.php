@@ -150,6 +150,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'attributes' => [
                 [
                     'attribute' => 'id',
+                    'format' => 'raw',
                     'value' => $model->fullId,
                 ],
                 [

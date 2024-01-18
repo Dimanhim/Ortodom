@@ -35,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             [
                 'attribute' => 'full_name',
+                'format' => 'raw',
                 'value' => function($data) {
                     return $data->fullName;
                 }
@@ -43,6 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'address',
             'phone',
             'passport_data:ntext',
+            'problem_data:ntext',
             'created_at:datetime',
         ],
     ]); ?>
@@ -55,6 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 [
                     'attribute' => 'id',
+                    'format' => 'raw',
                     'value' => function ($data) {
                         return $data->fullId;
                     },
@@ -67,8 +70,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'attribute' => 'patient_id',
+                    'format' => 'raw',
                     'value' => function ($data) {
-                        return $data->patient ? $data->patient->full_name : '-';
+                        return $data->patient ? $data->patient->fullName : '-';
                     },
                 ],
                 'representative_name',

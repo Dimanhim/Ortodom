@@ -112,6 +112,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'attribute' => 'patient_id',
+                    'format' => 'raw',
                     'contentOptions' => ['class' => 'fix-row'],
                     'headerOptions' => ['style' => 'width: 140px;'],
                     'value' => function ($data) {
