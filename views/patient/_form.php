@@ -43,6 +43,8 @@ use yii\jui\DatePicker;
 
     <?php echo $form->field($model, 'passport_data')->textarea(['rows' => 6]); ?>
 
+    <?php echo $form->field($model, 'problem')->checkbox(); ?>
+
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? 'Добавить' : 'Сохранить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']); ?>
     </div>

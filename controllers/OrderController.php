@@ -106,6 +106,25 @@ class OrderController extends Controller
      */
     public function actionPrint($id, $data, $new = false)
     {
+        $view = '';
+        if($id and ($orderIds = json_decode($id, true))) {
+            if($orderIds['ids']) {
+                $i = 1;
+                foreach($orderIds['ids'] as $order_id) {
+                    $view .= $this->getOrderView($order_id, $data);
+                    $view .= ($i == count($orderIds['ids'])) ? '' : '<div style="page-break-after: always;"></div>';
+                    $i++;
+                }
+                if($view) return $view;
+            }
+
+        }
+
+        throw new BadRequestHttpException();
+    }
+
+    public function getOrderView($id, $data)
+    {
         $model = $this->findModel($id);
         $viewName = null;
         $data = json_decode($data);
@@ -155,10 +174,8 @@ class OrderController extends Controller
                 $view .= $this->renderPartial($viewName, ['model' => $model, 'new' => true]);
                 $view .= ($i == count($data->type)) ? '' : '<div style="page-break-after: always;"></div>';
             }
-
         }
-        if($view) return $view;
-        throw new BadRequestHttpException();
+        return $view;
     }
 
     /**

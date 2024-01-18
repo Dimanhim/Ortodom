@@ -12,6 +12,8 @@
 
 namespace app\models;
 
+use app\components\Helpers;
+
 /**
  * This is the model class for table "patients".
  *
@@ -49,7 +51,7 @@ class Patient extends \yii\db\ActiveRecord
             [['full_name', 'birthday', 'address', 'phone', 'passport_data'], 'required'],
             [['birthday'], 'safe'],
             [['passport_data'], 'string'],
-            [['created_at'], 'integer'],
+            [['created_at', 'problem'], 'integer'],
             [['full_name', 'address', 'phone'], 'string', 'max' => 255],
         ];
     }
@@ -66,6 +68,7 @@ class Patient extends \yii\db\ActiveRecord
             'address' => 'Адрес',
             'phone' => 'Телефон',
             'passport_data' => 'Паспортные данные пациента (представителя)',
+            'problem' => 'Проблемный пациент',
             'created_at' => 'Добавлен',
         ];
     }
@@ -150,5 +153,10 @@ class Patient extends \yii\db\ActiveRecord
             if($order->payment_id == $payment) return true;
         }
         return false;
+    }
+
+    public function getFullName()
+    {
+        return $this->problem ? $this->full_name . Helpers::$_problem_sign : $this->full_name;
     }
 }

@@ -7,6 +7,7 @@ use Picqer\Barcode\BarcodeGeneratorSVG;
 class Helpers
 {
     public $default = '4797001018719';
+    static $_problem_sign = ' (*)';
 
     public static function generateBarcode($code)
     {

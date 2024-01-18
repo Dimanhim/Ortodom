@@ -115,7 +115,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'contentOptions' => ['class' => 'fix-row'],
                     'headerOptions' => ['style' => 'width: 140px;'],
                     'value' => function ($data) {
-                        return $data->patient ? $data->patient->full_name : '-';
+                        return $data->patient ? $data->patient->fullName : '-';
                     },
                     'filter' => Widget::widget([
                         'model' => $searchModel,
@@ -254,6 +254,10 @@ $this->params['breadcrumbs'][] = $this->title;
         ]); ?>
     <?php //Pjax::end(); ?>
 </div>
+<?php
+echo $this->render('print-links/default');
+echo Html::a('Печать', null, ['class' => 'btn btn-primary print', 'data-id' => 'all']);
+?>
 <div id="view-modal">
     <div class="modal" id="order-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">

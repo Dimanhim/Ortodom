@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'patient_id',
-                'value' => $model->patient ? Html::a($model->patient->full_name, ['patient/view', 'id' => $model->patient->id], ['target' => '_blanc']) : '-',
+                'value' => $model->patient ? Html::a($model->patient->fullName, ['patient/view', 'id' => $model->patient->id], ['target' => '_blanc']) : '-',
             ],
             'representative_name',
             'referral',
@@ -160,7 +160,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'patient_id',
                     'format' => 'raw',
                     //'value' => $model->patient ? $model->patient->full_name : '-',
-                    'value' => $model->patient ? Html::a($model->patient->full_name, ['patient/view', 'id' => $model->patient->id], ['target' => '_blanc']) : '-',
+                    'value' => $model->patient ? Html::a($model->patient->fullName, ['patient/view', 'id' => $model->patient->id], ['target' => '_blanc']) : '-',
                 ],
                 'representative_name',
                 'referral',

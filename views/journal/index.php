@@ -108,7 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['class' => 'fix-row'],
                 'headerOptions' => ['style' => 'width: 150px;'],
                 'value' => function ($data) {
-                    return $data->patient ? $data->patient->full_name : '-';
+                    return $data->patient ? $data->patient->fullName : '-';
                 },
                 'filter' => Widget::widget([
                     'model' => $searchModel,

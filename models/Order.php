@@ -176,7 +176,11 @@ class Order extends BaseOrder
 
     public function getFullId()
     {
-        return \str_pad($this->id, 4, 0, STR_PAD_LEFT);
+        $number = \str_pad($this->id, 4, 0, STR_PAD_LEFT);
+        if($this->patient and $this->patient->problem) {
+            $number .= Helpers::$_problem_sign;
+        }
+        return $number;
     }
 
     /**
