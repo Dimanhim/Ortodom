@@ -97,6 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'header' => $searchModel->getHeaderId(),
                 'attribute' => 'id',
+                'format' => 'raw',
                 'value' => function ($data) {
                     return $data->fullId;
                 },
@@ -107,6 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'patient_id',
                 'contentOptions' => ['class' => 'fix-row'],
                 'headerOptions' => ['style' => 'width: 150px;'],
+                'format' => 'raw',
                 'value' => function ($data) {
                     return $data->patient ? $data->patient->fullName : '-';
                 },

@@ -96,6 +96,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'header' => $searchModel->getHeaderId(),
                     'attribute' => 'id',
+                    'format' => 'raw',
                     'value' => function ($data) {
                         return $data->fullId;
                     },

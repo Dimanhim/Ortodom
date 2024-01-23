@@ -42,7 +42,7 @@ $user = Yii::$app->user->identity;
 </table>
 
 <br>
-<span style="font-weight:bold;font-size:18pt;">&nbsp;&nbsp;  МЕДИЦИНСКИЙ ЗАКАЗ № <?= $model->fullId ?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:17pt;">форма оплаты: <strong><?= $model->payment->nameValue ?></strong></span>
+<span style="font-weight:bold;font-size:18pt;">&nbsp;&nbsp;  МЕДИЦИНСКИЙ ЗАКАЗ № <?= $model->fullId ?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:17pt;">Ф/О: <strong><?= $model->payment->nameValue ?></strong></span>
 <br>
 <table style="width: 100%;">
     <tr>
@@ -207,7 +207,7 @@ $user = Yii::$app->user->identity;
             <p class="text">Заказчик / Представитель:_______________<br/><br/>
                 (ф.и.о.) <?= $model->representative_name ? $model->representative_name : $model->patient->full_name ?><br/>
             </p>
-            
+
 
         </td>
 
