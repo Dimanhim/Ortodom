@@ -154,6 +154,9 @@ class OrderController extends Controller
                 case PrintTypes::ACT_LO_2023:
                     $viewName = 'print/act_lo_2023';
                     break;
+                case PrintTypes::ACT_LO_2024:
+                    $viewName = 'print/act_lo_2024';
+                    break;
                 case PrintTypes::SALES_RECEIPT:
                     $viewName = 'print/sales_receipt';
                     break;

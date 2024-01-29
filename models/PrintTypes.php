@@ -15,6 +15,7 @@ class PrintTypes
 
     const ACT_LO = 9;
     const ACT_LO_2023 = 12;
+    const ACT_LO_2024 = 13;
     const CONTRACT_LO = 10;
 
 
@@ -25,4 +26,7 @@ class PrintTypes
 
     const PRICE_LO_2023 = 9307.4;
     const PRICE_LO_TEXT_2023 = '9307 (девять тысяч триста семь) рублей 40 копеек';
+
+    const PRICE_LO_2024 = 9910.40;
+    const PRICE_LO_TEXT_2024 = '9910 (девять тысяч девятьсот десять) рублей 40 копеек';
 }

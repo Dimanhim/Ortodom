@@ -34,7 +34,7 @@ $acceptTime = strtotime($model->accepted);
         </td>
         <td>
             <div style="text-align:right;font-size: 15pt;margin-top: 20px;">
-                «_____»  ______________ <?= date('Y') ?> года
+                «_____»  ______________ 20__ года
             </div>
         </td>
     </tr>

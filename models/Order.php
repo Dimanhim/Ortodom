@@ -797,8 +797,18 @@ class Order extends BaseOrder
                 break;
             case 18 : return PrintTypes::PRICE_LO_TEXT_2023;
                 break;
+            case 20 : return PrintTypes::PRICE_LO_TEXT_2024;
+                break;
         }
         return false;
+    }
+
+    public function getActLoType()
+    {
+        if($this->payment_id == 20) {
+            return PrintTypes::ACT_LO_2024;
+        }
+        return PrintTypes::ACT_LO_2023;
     }
 
 }

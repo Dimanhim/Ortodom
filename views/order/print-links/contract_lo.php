@@ -20,7 +20,7 @@ use app\models\PrintTypes;
             <li><input class="print" type="checkbox" value="<?= PrintTypes::WARRANTY_CARD ?>"> Гарантийный талон</li>
             <li><input class="print" type="checkbox" value="<?= PrintTypes::WARRANTY_KSP ?>"> Гарантийный КСП</li>
             <li>
-                <input class="print" type="checkbox" value="<?= (isset($new) && $new) ? PrintTypes::ACT_LO_2023 : PrintTypes::ACT_LO ?>"> Акт выполненных работ - 3 шт
+                <input class="print" type="checkbox" value="<?= (isset($new) && $new) ? $model->getActLoType() : PrintTypes::ACT_LO ?>"> Акт выполненных работ - 3 шт
             </li>
         </ul>
     </div>

@@ -264,7 +264,9 @@ $this->params['breadcrumbs'][] = $this->title;
         if($model->payment_id == 11)
             echo $this->render('print-links/contract_lo');
         elseif ($model->payment_id == 18)
-            echo $this->render('print-links/contract_lo', ['new' => true]);
+            echo $this->render('print-links/contract_lo', ['new' => true, 'model' => $model]);
+        elseif ($model->payment_id == 20)
+            echo $this->render('print-links/contract_lo', ['new' => true, 'model' => $model]);
         else
             echo $this->render('print-links/default');
     ?>
