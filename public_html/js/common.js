@@ -407,7 +407,7 @@ $('body').on('change', '#ordersearch-changestatusform, #journalsearch-changestat
     $('.row-item').each(function(index, element) {
         var checkbox = $(element).find('.order-checkbox input');
         if(checkbox.is(':checked')) {
-            var id = $(element).find('.order-id').text();
+            var id = $(element).attr('data-key')
             ids.push(Number(id));
         }
     });
@@ -418,6 +418,7 @@ $('body').on('change', '#ordersearch-changestatusform, #journalsearch-changestat
     json = json.substr(0, (json.length - 1));
     json += ']}';
     $.get('/order/change-status-packet', {json: json}, function(res) {
+        console.log('res', res)
         if(res) {
             window.location = url;
         }

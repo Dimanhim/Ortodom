@@ -174,10 +174,10 @@ class Order extends BaseOrder
         ];
     }
 
-    public function getFullId()
+    public function getFullId($problem = true)
     {
         $number = \str_pad($this->id, 4, 0, STR_PAD_LEFT);
-        if($this->patient and $this->patient->problem) {
+        if($problem and $this->patient and $this->patient->problem) {
             $number .= Helpers::$_problem_sign;
         }
         return $number;

@@ -42,7 +42,7 @@ $issuedTime = strtotime($model->issued);
 <div  style="font-weight: bold; font-size: 14pt;">ГАРАНТИЙНЫЙ ТАЛОН</div>
 <br>
 
-<p><strong>Заказ № <?= $model->fullId ?></strong><br>
+<p><strong>Заказ № <?= $model->getFullId(false) ?></strong><br>
     Ф.И.О <strong><?= $model->patient->full_name ?></strong><br>
     Вид обуви / артикул: <strong>сложная ортопедическая обувь с индивидуальными параметрами изготовления <?= $model->shoes->name ?></strong><br>
     <?php

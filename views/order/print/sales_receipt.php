@@ -87,7 +87,7 @@ $issuedTime = strtotime($model->issued);
         <tr>
             <td colspan="6">
                 <div style="text-align:center;">
-                    <p><span style="font-weight: bold; font-size: 13pt; width:100%;">Товарный чек № <?= $model->fullId ?></span>
+                    <p><span style="font-weight: bold; font-size: 13pt; width:100%;">Товарный чек № <?= $model->getFullId(false) ?></span>
                         <span style="font-weight: bold; font-size: 13pt; width:100%;">от __________</span>
                     <p>
                 </div>
@@ -127,7 +127,7 @@ $issuedTime = strtotime($model->issued);
             <p>Сложная ортопедическая обувь с индивидуальными параметрами изготовления</p>
             <p><?= $model->shoes->name ?></p>
             <p>Диагноз: <?= $model->diagnosis->name ?></p>
-            <p>№ договора и дата приёма: <?= $model->fullId ?>, <?= $model->accepted ?></p>
+            <p>№ договора и дата приёма: <?= $model->getFullId(false) ?>, <?= $model->accepted ?></p>
         </td>
         <td>
             <p>пара</p>

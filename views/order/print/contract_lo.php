@@ -25,7 +25,7 @@ $issuedTime = strtotime($model->issued);
         <tr>
             <td colspan="2">
                 <div style="text-align:center;">
-                    <span style="font-weight:bold;font-size:13pt;"> ДОГОВОР № <?= $model->fullId ?></span><br>
+                    <span style="font-weight:bold;font-size:13pt;"> ДОГОВОР № <?= $model->getFullId(false) ?></span><br>
                 </div>
             </td>
         </tr>

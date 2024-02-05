@@ -5,7 +5,7 @@
             <td colspan="2">
                 <div class="barcode-content-box">
                     <div>
-                        Номер заказа: <?= $model->getFullId() ?>
+                        Номер заказа: <?= $model->getFullId(false) ?>
                     </div>
                 </div>
             </td>

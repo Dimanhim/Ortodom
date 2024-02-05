@@ -21,7 +21,7 @@ $acceptTime = strtotime($model->accepted);
     <tr>
         <td colspan="2">
             <div style="text-align:center;font-size: 15pt;">
-                <strong>Акт выполненных работ № <span style="font-weight:bold;"><?= $model->fullId ?> </span> от _________</strong>
+                <strong>Акт выполненных работ № <span style="font-weight:bold;"><?= $model->getFullId(false) ?> </span> от _________</strong>
             </div>
         </td>
     <tr>

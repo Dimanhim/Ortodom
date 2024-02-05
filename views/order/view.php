@@ -8,7 +8,7 @@ use barcode\barcode\BarcodeGenerator;
 /* @var $this yii\web\View */
 /* @var $model app\models\Order */
 
-$this->title = 'Заказ №'.$model->fullId;
+$this->title = 'Заказ №'.$model->getFullId(false);
 $this->params['breadcrumbs'][] = ['label' => 'Заказы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

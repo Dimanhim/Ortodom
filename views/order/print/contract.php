@@ -44,7 +44,7 @@ $issuedTime = strtotime($model->issued);
         <tr>
             <td colspan="2">
                 <div style="text-align:center;">
-                    <span style="font-weight:bold;font-size:13pt;"> ДОГОВОР № <?= $model->fullId ?></span><br>
+                    <span style="font-weight:bold;font-size:13pt;"> ДОГОВОР № <?= $model->getFullId(false) ?></span><br>
                     (на изготовление индивидуальных ортопедических изделий)
                 </div>
             </td>
@@ -262,7 +262,7 @@ $issuedTime = strtotime($model->issued);
 <hr>
 <br>
 <div style="padding: 0 25px; page-break-after: always;">
-    <p><strong>Приложение к Договору № <?= $model->fullId ?> от <?= date('d', $acceptTime) ?> <?= Yii::$app->formatter->asDate($acceptTime, 'MMMM') ?> <?= date('Y', $acceptTime) ?> г.</strong></p>
+    <p><strong>Приложение к Договору № <?= $model->getFullId(false) ?> от <?= date('d', $acceptTime) ?> <?= Yii::$app->formatter->asDate($acceptTime, 'MMMM') ?> <?= date('Y', $acceptTime) ?> г.</strong></p>
     <p><strong>Согласие на обработку персональных данных</strong></p>
     <p>Я, <?= $model->representative_name ? $model->representative_name : $model->patient->full_name ?>, в соответствии с требованиями ст. 9 ФЗ «О персональных данных», подтверждаю свое согласие на обработку ООО «ОртоДом», моих персональных данных.</p>
     <p>Перечень моих персональных данных, на обработку которых я даю согласие:</p>

@@ -68,7 +68,7 @@ $acceptTime = strtotime($model->accepted);
 </table>
 
 <p class="pr-header"><span>КВИТАНЦИЯ О ПРИЁМЕ ЗАКАЗА НА ИЗГОТОВЛЕНИЕ ОРТОПЕДИЧЕСКОЙ ОБУВИ</span></p>
-<br><span style="font-weight: bold; width:100%;">ЗАКАЗ №<?= $model->fullId ?></span>
+<br><span style="font-weight: bold; width:100%;">ЗАКАЗ №<?= $model->getFullId(false) ?></span>
 <p>Форма оплаты: <strong><?= $model->payment->nameValue ?></strong></p>
 <p>Ф.И.О: <strong><?= $model->patient->full_name ?></strong></p>
 <?php if (!empty($model->representative_name)): ?>
