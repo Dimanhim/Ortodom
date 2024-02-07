@@ -69,6 +69,9 @@ h1 {
     color: #c55;
     font-style: italic;
 }
+.representative-edit-link {
+    cursor: pointer
+}
 .sms-yandex-review {
     display: none;
 }

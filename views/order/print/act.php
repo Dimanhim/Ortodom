@@ -44,9 +44,9 @@ $acceptTime = strtotime($model->accepted);
 <div style="font-weight: bold; font-size: 13pt; width:100%;">
     (Ф.И.О.) <span style=""><?= $model->patient->full_name ?></span>
 </div>
-<?php if (!empty($model->representative_name)): ?>
+<?php if (!empty($model->representativeName)): ?>
     <div style="font-weight: bold; font-size: 13pt; width:100%;">
-        (Ф.И.О. представителя) <span style=""><?= $model->representative_name ?></span>
+        (Ф.И.О. представителя) <span style=""><?= $model->representativeName ?></span>
     </div>
 <?php endif ?>
 <br/>
@@ -74,12 +74,12 @@ $acceptTime = strtotime($model->accepted);
     <div> ______________________ (Акопян А.А.)</div>
     <br>
     <p><em><strong>ЗАКАЗЧИК/ПРЕДСТАВИТЕЛЬ:</strong></em> </p>
-    <p>Ф.И.О. <?= $model->representative_name ? $model->representative_name : $model->patient->full_name ?><br>
+    <p>Ф.И.О. <?= $model->fullName ?><br>
         Зарегистрирован: <?= $model->patient->address ?><br>
-        Паспортные данные <?= $model->patient->passport_data ?><br>
+        Паспортные данные <?= $model->passportData ?><br>
         Тел. <?= $model->patient->phone ?></p>
     <br>
-    <div> ______________________ (<?= $model->representative_name ? $model->representative_name : $model->patient->full_name ?>)</div>
+    <div> ______________________ (<?= $model->fullName ?>)</div>
     <br>
 </body>
 </html>

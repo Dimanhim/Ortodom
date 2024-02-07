@@ -52,7 +52,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'patient_id',
                 'value' => $model->patient ? Html::a($model->patient->fullName, ['patient/view', 'id' => $model->patient->id], ['target' => '_blanc']) : '-',
             ],
-            'representative_name',
+            [
+                'attribute' => 'representative_id',
+                'value' => function($data) {
+                    return $data->fullName;
+                }
+            ],
             'referral',
             'model',
             //'color',
@@ -163,9 +168,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     //'value' => $model->patient ? $model->patient->full_name : '-',
                     'value' => $model->patient ? Html::a($model->patient->fullName, ['patient/view', 'id' => $model->patient->id], ['target' => '_blanc']) : '-',
                 ],
-                'representative_name',
+                [
+                    'attribute' => 'representative_name',
+                    'value' => function($data) {
+                        return $data->fullName;
+                    }
+                ],
                 'referral',
-                'model',
+                //'model',
                 [
                     'attribute' => 'shoes_id',
                     'value' => $model->shoes ? $model->shoes->name : '-',
@@ -186,6 +196,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'appointment_right',
                 'appointment_right_data',
+                'need_fitting:boolean',
                 'accepted',
                 [
                     'attribute' => 'issued',

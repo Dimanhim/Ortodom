@@ -108,7 +108,7 @@ $acceptTime = strtotime($model->accepted);
             <div style="text-align:center;"> КВИТАНЦИЯ  </div><br/>
             </strong>к приходному кассовому ордеру №<?= $model->getFullId(false) ?><br/>
             от «<?= date('d', time()) ?>» <?= Yii::$app->formatter->asDate(time(), 'MMMM') ?> <?= date('Y', time()) ?><br/>
-            Принято от: <?= $model->representative_name ? $model->representative_name : $model->patient->full_name ?><br>
+            Принято от: <?= $model->fullName ?><br>
         </td>
     </tr>
     <tr style="height: 1px;">
@@ -199,7 +199,7 @@ $acceptTime = strtotime($model->accepted);
     <tr style="height: 1px;">
         <td>Принято от:</td>
         <td colspan="5">
-            <?= $model->representative_name ? $model->representative_name : $model->patient->full_name ?>
+            <?= $model->fullName ?>
         </td>
         <td>___________</td>
         <td>руб._______</td>

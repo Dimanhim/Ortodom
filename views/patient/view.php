@@ -40,6 +40,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->fullName;
                 }
             ],
+            [
+                'attribute' => 'Представитель',
+                'value' => function($data) {
+                    if($data->representative) {
+                        return $data->representative->name;
+                    }
+                }
+            ],
             'birthday',
             'address',
             'phone',
@@ -75,7 +83,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         return $data->patient ? $data->patient->fullName : '-';
                     },
                 ],
-                'representative_name',
+                [
+                    'attribute' => 'representative_id',
+                    'format' => 'raw',
+                    'value' => function ($data) {
+                        return $data->fullName;
+                    },
+                ],
                 'referral',
                 [
                     'attribute' => 'shoes_id',

@@ -44,6 +44,9 @@ $issuedTime = strtotime($model->issued);
 
 <p><strong>Заказ № <?= $model->getFullId(false) ?></strong><br>
     Ф.И.О <strong><?= $model->patient->full_name ?></strong><br>
+    <?php if($model->representativeName) : ?>
+        Ф.И.О представителя <strong><?= $model->representativeName ?></strong><br>
+    <?php endif; ?>
     Вид обуви / артикул: <strong>сложная ортопедическая обувь с индивидуальными параметрами изготовления <?= $model->shoes->name ?></strong><br>
     <!-- Модель: <strong><?= $model->model ?></strong><br>
     Цвет: <strong><?= $model->color ?></strong><br>

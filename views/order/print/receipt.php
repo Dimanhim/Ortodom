@@ -71,8 +71,8 @@ $acceptTime = strtotime($model->accepted);
 <br><span style="font-weight: bold; width:100%;">ЗАКАЗ №<?= $model->getFullId(false) ?></span>
 <p>Форма оплаты: <strong><?= $model->payment->nameValue ?></strong></p>
 <p>Ф.И.О: <strong><?= $model->patient->full_name ?></strong></p>
-<?php if (!empty($model->representative_name)): ?>
-    <p>Ф.И.О представителя: <strong><?= $model->representative_name ?></strong></p>
+<?php if (!empty($model->representativeName)): ?>
+    <p>Ф.И.О представителя: <strong><?= $model->representativeName ?></strong></p>
 <?php endif ?>
 <p>Направление № <?= $model->referral ?> </p>
 <p>Вид обуви: <strong>сложная ортопедическая обувь с индивидуальными параметрами изготовления <?= $model->shoes->name ?></strong></p>

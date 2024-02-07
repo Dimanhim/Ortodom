@@ -42,7 +42,7 @@ $user = Yii::$app->user->identity;
 </table>
 
 <br>
-<span style="font-weight:bold;font-size:18pt;">&nbsp;&nbsp;  МЕДИЦИНСКИЙ ЗАКАЗ № <?= $model->getFullId(false) ?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:17pt;">Ф/О: <strong><?= $model->payment->nameValue ?></strong></span>
+<span style="font-weight:bold;font-size:18pt;">&nbsp;&nbsp;  МЕДИЦИНСКИЙ ЗАКАЗ № <?= $model->getFullId() ?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:17pt;">Ф/О: <strong><?= $model->payment->nameValue ?></strong></span>
 <br>
 <table style="width: 100%;">
     <tr>
@@ -56,10 +56,10 @@ $user = Yii::$app->user->identity;
                         </strong>
                     </span>
                 </li>
-                <?php if (!empty($model->representative_name)): ?>
+                <?php if (!empty($model->representativeName)): ?>
                     Ф.И.О представителя:
                     <span class="dop-data">
-                        <?= $model->representative_name ?>
+                        <?= $model->representativeName ?>
                     </span>
                     <br>
                 <?php endif ?>
@@ -140,6 +140,7 @@ $user = Yii::$app->user->identity;
         </td>
         <td style="vertical-align: top">
             <?= $this->render('//order/print/_barcode', ['model' => $model]) ?>
+            <?= $model->fittingSign() ?>
             <div style="width: 270px">
                 <?= \yii\helpers\Html::img($model->modelImage(), ['style' => 'width: 100%']) ?>
             </div>
@@ -205,7 +206,7 @@ $user = Yii::$app->user->identity;
             </p>
 
             <p class="text">Заказчик / Представитель:_______________<br/><br/>
-                (ф.и.о.) <?= $model->representative_name ? $model->representative_name : $model->patient->full_name ?><br/>
+                (ф.и.о.) <?= $model->fullName ?><br/>
             </p>
 
 
@@ -229,7 +230,7 @@ $user = Yii::$app->user->identity;
             </p>
 
             <p class="text">Заказчик / Представитель:_______________<br/><br/>
-                (ф.и.о.) <?= $model->representative_name ? $model->representative_name : $model->patient->full_name ?><br/>
+                (ф.и.о.) <?= $model->fullName ?><br/>
             </p>
 
         </td>
@@ -257,7 +258,7 @@ $user = Yii::$app->user->identity;
             </p>
 
             <p class="text">Заказчик / Представитель:_______________<br/><br/>
-                (ф.и.о.) <?= $model->representative_name ? $model->representative_name : $model->patient->full_name ?><br/>
+                (ф.и.о.) <?= $model->fullName ?><br/>
             </p>
         </td>
     </tr>

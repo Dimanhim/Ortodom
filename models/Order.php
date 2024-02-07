@@ -87,7 +87,7 @@ class Order extends BaseOrder
     {
         return [
             [['patient_id', 'accepted'], 'required'],
-            [['payment_id', 'status_id', 'status_date', 'patient_id', 'diagnosis_id', 'shoes_id', 'checkbox', 'appointment_left_id', 'appointment_right_id', 'prepaid_date', 'sms_yandex_review', 'sms_yandex_datetime', 'sms_yandex_result', 'sms_ready'], 'integer'],
+            [['payment_id', 'status_id', 'status_date', 'patient_id', 'diagnosis_id', 'shoes_id', 'checkbox', 'appointment_left_id', 'appointment_right_id', 'prepaid_date', 'sms_yandex_review', 'sms_yandex_datetime', 'sms_yandex_result', 'sms_ready', 'representative_id', 'need_fitting'], 'integer'],
             [['accepted', 'issued', 'changeStatusForm', 'changeColorForm', 'highlightLine'], 'safe'],
             [['prepaid', 'cost'], 'number'],
             [['file'], 'file'],
@@ -123,6 +123,7 @@ class Order extends BaseOrder
             'status_id' => 'Статус',
             'status_date' => 'Дата',
             'representative_name' => 'ФИО представителя',
+            'representative_id' => 'Представитель',
             'payment_id' => 'Форма оплаты',
             'diagnosis_id' => 'Диагноз',
             'referral' => '№ и дата направления',
@@ -171,6 +172,7 @@ class Order extends BaseOrder
             'highlightLine' => 'Выделить строку цветом',
 
             'sms_yandex_review' => 'Оставить отзыв на Яндексе',
+            'need_fitting' => 'Нужна примерка',
         ];
     }
 
@@ -230,6 +232,16 @@ class Order extends BaseOrder
     public function getShoes()
     {
         return $this->hasOne(Shoes::className(), ['id' => 'shoes_id']);
+    }
+
+    public function getRepresentative()
+    {
+        return $this->hasOne(PatientRepresentative::className(), ['id' => 'representative_id']);
+    }
+
+    public function getRepresentativeName()
+    {
+        return $this->representative ? $this->representative->name : null;
     }
 
     /**
@@ -809,6 +821,40 @@ class Order extends BaseOrder
             return PrintTypes::ACT_LO_2024;
         }
         return PrintTypes::ACT_LO_2023;
+    }
+
+    public function getRepresentativeDropdownlistHtml($selection = null)
+    {
+        return \Yii::$app->controller->renderPartial('//order/_representative_dropdown_list', [
+            'model' => $this,
+        ]);
+    }
+
+    public function getFullName()
+    {
+        if($this->representative) {
+            return $this->representative->name;
+        }
+        if($this->patient->representative) {
+            return $this->patient->representative->name;
+        }
+        return $this->patient->full_name;
+    }
+
+    public function getPassportData()
+    {
+        if($this->representative) {
+            return $this->representative->passport_data;
+        }
+        $this->patient->passport_data;
+    }
+
+    public function fittingSign()
+    {
+        if($this->need_fitting) {
+            return '<p style="font-weight:bold;font-size:18pt; margin:10px auto 0;text-align:center;color: #d9534f;">ПРИМЕРКА</p>';
+        }
+        return false;
     }
 
 }

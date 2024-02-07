@@ -12,6 +12,8 @@
 
 namespace app\controllers;
 
+use app\models\Order;
+use app\models\PatientRepresentative;
 use app\modules\directory\models\Payment;
 use Yii;
 use app\models\OrderSearch;
@@ -24,6 +26,7 @@ use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 use app\models\PaymentForm;
 use app\models\User;
+use yii\web\Response;
 
 /**
  * PatientController implements the CRUD actions for Patient model.
@@ -201,6 +204,95 @@ class PatientController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionRepresentativeDropdownList()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $response = [
+            'result' => 0,
+            'html' => null,
+        ];
+
+        if($model = Patient::findOne(Yii::$app->request->post('patient_id'))) {
+            $order = new Order();
+            $order->patient_id = $model->id;
+            if($response['html'] = $order->getRepresentativeDropdownlistHtml()) {
+                $response['result'] = 1;
+            }
+        }
+        return $response;
+    }
+
+    public function actionRepresentativeForm()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $response = [
+            'result' => 0,
+            'html' => null,
+        ];
+
+        $patient_id = Yii::$app->request->post('patient_id');
+        $representative_id = Yii::$app->request->post('representative_id');
+        if(!$model = PatientRepresentative::findOne($representative_id)) {
+            $model = new PatientRepresentative();
+            $model->patient_id = $patient_id;
+        }
+
+        if($response['html'] = $model->getRepresentativeFormHtml()) {
+            $response['result'] = 1;
+        }
+
+
+        return $response;
+    }
+
+    public function actionRepresentativeSave()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $response = [
+            'result' => 0,
+            'html' => null,
+        ];
+        $model = new PatientRepresentative();
+        $modelId = $_POST['PatientRepresentative']['id'] ?? null;
+        if($model->load(Yii::$app->request->post())) {
+            if($modelId and ($representative = PatientRepresentative::findOne($modelId))) {
+                $representative->attributes = $model->attributes;
+                if($representative->save()) {
+                    if($response['html'] = $representative->getRepresentativeHtml()) {
+                        $response['result'] = 1;
+                        return $response;
+                    }
+                }
+            }
+            if($model->save()) {
+                if($response['html'] = $model->getRepresentativeHtml()) {
+                    $response['result'] = 1;
+                    return $response;
+                }
+            }
+        }
+        return $response;
+    }
+
+    public function actionRepresentativeDelete()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $response = [
+            'result' => 0,
+            'html' => null,
+        ];
+        $representative_id = Yii::$app->request->post('representative_id');
+        if($model = PatientRepresentative::findOne($representative_id)) {
+            if($model->delete()) {
+                if($response['html'] = $model->getRepresentativeHtml()) {
+                    $response['result'] = 1;
+
+                }
+            }
+        }
+        return $response;
     }
 
     /**

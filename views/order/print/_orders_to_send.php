@@ -13,7 +13,7 @@
             <td colspan="2">
                 <div class="barcode-content-box">
                     <div>
-                        ФИО: <?= $model->patient->full_name ?>
+                        ФИО: <?= $model->fullName ?>
                     </div>
                 </div>
             </td>

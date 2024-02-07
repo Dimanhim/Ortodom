@@ -57,7 +57,7 @@ $issuedTime = strtotime($model->issued);
 
     <p>ООО «ОртоДом» в лице Генерального директора <strong>Акопяна Артура Аликовича</strong>, действующего на основании Устава, именуемый в дальнейшем «Исполнитель» и
         (Ф.И.О) <strong><?= $model->patient->full_name ?></strong>,<br>
-        (Ф.И.О представителя) <strong><?= $model->representative_name ?></strong>,<br>
+        (Ф.И.О представителя) <strong><?= $model->representativeName ?></strong>,<br>
         именуемый(ая) в дальнейшем «Заказчик», с другой стороны, заключили настоящий Договор о нижеследующем:
     </p>
 
@@ -218,9 +218,9 @@ $issuedTime = strtotime($model->issued);
 
         <br>
         <p><span style="text-decoration: underline; font-weight: bold;">ЗАКАЗЧИК/ПРЕДСТАВИТЕЛЬ:</span></p>
-        <p>Ф.И.О. <?= $model->representative_name ? $model->representative_name : $model->patient->full_name ?><br>
+        <p>Ф.И.О. <?= $model->fullName ?><br>
             Зарегистрирован: <?= $model->patient->address ?><br>
-            Паспортные данные <?= $model->patient->passport_data ?><br>
+            Паспортные данные <?= $model->passportData ?><br>
             Телефон <?= $model->patient->phone ?><br>
             С условиями настоящего Договора и бланком заказа ортопедического изделия <br>
             ознакомлен(а),<br>
@@ -248,7 +248,7 @@ $issuedTime = strtotime($model->issued);
                 <td>
                     <div style="text-align:right;">
                         <span style="font-weight:bold;font-size:13pt;">ЗАКАЗЧИК / ПРЕДСТАВИТЕЛЬ:</span><br/>
-                        ________________ (<?= $model->representative_name ? $model->representative_name : $model->patient->full_name ?>)
+                        ________________ (<?= $model->fullName ?>)
                     </div>
 
                 </td>
@@ -264,7 +264,7 @@ $issuedTime = strtotime($model->issued);
 <div style="padding: 0 25px; page-break-after: always;">
     <p><strong>Приложение к Договору № <?= $model->getFullId(false) ?> от <?= date('d', $acceptTime) ?> <?= Yii::$app->formatter->asDate($acceptTime, 'MMMM') ?> <?= date('Y', $acceptTime) ?> г.</strong></p>
     <p><strong>Согласие на обработку персональных данных</strong></p>
-    <p>Я, <?= $model->representative_name ? $model->representative_name : $model->patient->full_name ?>, в соответствии с требованиями ст. 9 ФЗ «О персональных данных», подтверждаю свое согласие на обработку ООО «ОртоДом», моих персональных данных.</p>
+    <p>Я, <?= $model->fullName ?>, в соответствии с требованиями ст. 9 ФЗ «О персональных данных», подтверждаю свое согласие на обработку ООО «ОртоДом», моих персональных данных.</p>
     <p>Перечень моих персональных данных, на обработку которых я даю согласие:</p>
     <ul>
         <li>- фамилия, имя, отчество;</li>

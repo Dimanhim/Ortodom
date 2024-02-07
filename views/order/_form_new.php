@@ -37,7 +37,11 @@ use yii\widgets\ActiveForm;
                     <div class="form-group">
                         <?= Html::a('Создать нового пациента', ['/patient/create', 'from' => 'order'], ['class' => 'btn btn-success', 'style' => 'margin-top: 16px']) ?>
                     </div>
-                    <?php echo $form->field($model, 'representative_name')->textInput(['maxlength' => true]); ?>
+                    <div id="representative-field">
+                        <?php if($model->patient) echo $form->field($model, 'representative_id')->dropDownList($model->patient->getRepresentativeList(), ['prompt' => '[Не выбрано]']) ?>
+                    </div>
+
+                    <?php //echo $form->field($model, 'representative_name')->textInput(['maxlength' => true]); ?>
                     <?php echo $form->field($model, 'payment_id')->dropDownList(ArrayHelper::map(Payment::find()->asArray()->all(), 'id', 'name'), ['prompt' => 'Выбрать']); ?>
                     <?php echo $form->field($model, 'referral')->textInput(['maxlength' => true]); ?>
                     <?php echo $form->field($model, 'diagnosis_id')->dropDownList(ArrayHelper::map(Diagnosis::find()->asArray()->all(), 'id', 'name'), ['prompt' => 'Выбрать']); ?>
@@ -47,7 +51,7 @@ use yii\widgets\ActiveForm;
                 <div class="panel-body">
                     <?php echo $form->field($model, 'shoes_id')->dropDownList(ArrayHelper::map(Shoes::find()->orderBy(['name' => SORT_ASC])->asArray()->all(), 'id', 'name'), ['prompt' => 'Выбрать']); ?>
                     <?php echo $form->field($model, 'shoes_data')->textInput(['maxlength' => true])->label(false) ?>
-                    <?= $form->field($model, 'model')->textInput(['maxlength' => true]) ?>
+                    <?//= $form->field($model, 'model')->textInput(['maxlength' => true]) ?>
                     <?= $form->field($model, 'brand_id')->dropDownList($model->brandList, ['prompt' => 'Выбрать']) ?>
                     <?= $form->field($model, 'brand_data')->textInput(['maxlength' => true])->label(false) ?>
                     <?= $form->field($model, 'lining_id')->dropDownList($model->liningList, ['prompt' => 'Выбрать']) ?>
@@ -144,6 +148,13 @@ use yii\widgets\ActiveForm;
                     </table>
                 </div>
             </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <?= $form->field($model, 'need_fitting')->checkbox() ?>
+                </div>
+            </div>
+
 
             <div class="panel panel-default">
                 <div class="panel-body">

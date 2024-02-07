@@ -43,8 +43,8 @@ $issuedTime = strtotime($model->issued);
         </tr>
     </table>
     <div class="block">
-        Общество с ограниченной ответственностью «ОртоДом», именуемый в дальнейшем "Исполнитель", в лице генерального директора Акопяна Артура Аликовича, действующего на основании Устава, с одной стороны, и <?= $model->representative_name ? $model->representative_name : $model->patient->full_name ?>, именуемый(ая) в дальнейшем «Заказчик», паспорт <?= $model->patient->passport_data ?>
-        <?php if($model->representative_name) : ?>
+        Общество с ограниченной ответственностью «ОртоДом», именуемый в дальнейшем "Исполнитель", в лице генерального директора Акопяна Артура Аликовича, действующего на основании Устава, с одной стороны, и <?= $model->fullName ?>, именуемый(ая) в дальнейшем «Заказчик», паспорт <?= $model->passportData ?>
+        <?php if($model->representative_name or $model->representative) : ?>
             , действующий в интересах несовершеннолетнего <?= $model->patient->full_name ?>, <?= $model->patient->birthday ?> г.р., зарегистрированного по адресу: <?= $model->patient->address ?>
         <?php endif; ?>
         с другой стороны, вместе именуемые "Стороны, заключили настоящий Договор о нижеследующем.
@@ -163,12 +163,12 @@ $issuedTime = strtotime($model->issued);
                     </td>
                     <td width="50%">
                         <p><em><strong>ЗАКАЗЧИК/ПРЕДСТАВИТЕЛЬ:</strong></em> </p>
-                        <p>Ф.И.О. <?= $model->representative_name ? $model->representative_name : $model->patient->full_name ?><br>
+                        <p>Ф.И.О. <?= $model->fullName ?><br>
                             Зарегистрирован: <?= $model->patient->address ?><br>
                             Паспортные данные <?= $model->patient->passport_data ?><br>
                             Тел. <?= $model->patient->phone ?></p>
                         <br>
-                        <div> _____________ (<?= $model->representative_name ? $model->representative_name : $model->patient->full_name ?>)</div>
+                        <div> _____________ (<?= $model->fullName ?>)</div>
                     </td>
                 </tr>
             </table>

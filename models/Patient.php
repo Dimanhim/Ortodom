@@ -13,6 +13,8 @@
 namespace app\models;
 
 use app\components\Helpers;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "patients".
@@ -67,7 +69,7 @@ class Patient extends \yii\db\ActiveRecord
             'birthday' => 'Дата рождения',
             'address' => 'Адрес',
             'phone' => 'Телефон',
-            'passport_data' => 'Паспортные данные пациента (представителя)',
+            'passport_data' => 'Паспортные данные пациента',
             'problem' => 'Проблемный пациент',
             'problem_data' => 'Особые отметки',
             'created_at' => 'Добавлен',
@@ -98,6 +100,15 @@ class Patient extends \yii\db\ActiveRecord
     public function getOrders()
     {
         return $this->hasMany(Order::className(), ['patient_id' => 'id']);
+    }
+
+    public function getRepresentatives()
+    {
+        return $this->hasMany(PatientRepresentative::className(), ['patient_id' => 'id']);
+    }
+    public function getRepresentative()
+    {
+        return $this->representatives[0] ?? null;
     }
 
     /**
@@ -160,4 +171,15 @@ class Patient extends \yii\db\ActiveRecord
     {
         return $this->problem ? $this->full_name . Helpers::$_problem_sign : $this->full_name;
     }
+
+
+
+
+
+    public function getRepresentativeList()
+    {
+        return ArrayHelper::map($this->representatives, 'id', 'name');
+    }
+
+
 }

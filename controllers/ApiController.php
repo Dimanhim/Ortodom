@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Order;
 use app\models\OrderStatusDate;
+use app\models\PatientRepresentative;
 use app\models\PatientsOld;
 use Yii;
 use app\models\Patient;
@@ -401,5 +402,177 @@ class ApiController extends Controller
         }
         return $response;
     }
+
+    public function actionAddRepresentatives()
+    {
+        return true;
+        $count = 0;
+        $count_orders = 0;
+        $time_begin = time();
+        $doubles = [];
+        if($orders = Order::find()->where(['not', ['representative_name' => null]])->andWhere(['not', ['representative_name' => '']])->andWhere(['is','representative_id', null])->all()) {
+            file_put_contents('info-log.txt', date('d.m.Y H:i:s').' count orders - '.print_r(count($orders), true)."\n", FILE_APPEND);
+            foreach($orders as $order) {
+                if($order->patient) {
+                    $representative = PatientRepresentative::find()
+                        //->select(['id', 'patient_id'])
+                        ->where(['patient_id' => $order->patient->id, 'name' => $order->representative_name])
+                        ->one();
+                    if(!$representative) {
+
+                        $representative = new PatientRepresentative();
+                        $representative->patient_id = $order->patient->id;
+                        $representative->name = $order->representative_name;
+                        if($representative->save()) {
+                            $count++;
+                            $order->representative_id = $representative->id;
+                            if($order->save(false)) {
+                                $count_orders++;
+                            }
+                            else {
+                                file_put_contents('info-log.txt', date('d.m.Y H:i:s').' order errors 1 - '.print_r($order->errors, true)."\n", FILE_APPEND);
+                            }
+                        }
+                        else {
+                            file_put_contents('info-log.txt', date('d.m.Y H:i:s').' representative errors - '.print_r($representative->errors, true)."\n", FILE_APPEND);
+                        }
+
+                    }
+                    elseif($order->patient->id == $representative->patient_id) {
+                        $order->representative_id = $representative->id;
+                        if($order->save(false)) {
+                            $count_orders++;
+                        }
+                        else {
+                            file_put_contents('info-log.txt', date('d.m.Y H:i:s').' order errors 2 - '.print_r($order->errors, true)."\n", FILE_APPEND);
+                        }
+                    }
+
+
+
+
+
+
+
+
+
+                    /*if(!array_key_exists($order->patient->id, $doubles)) {
+                        $doubles[$order->patient->id] = [];
+                    }
+                    if(!in_array($order->representative_name, $doubles[$order->patient->id])) {
+                        $representative = new PatientRepresentative();
+                        $representative->patient_id = $order->patient->id;
+                        $representative->name = $order->representative_name;
+                        if($representative->save()) {
+                            file_put_contents('info-log.txt', date('d.m.Y H:i:s').' - '.print_r($count, true)."\n", FILE_APPEND);
+                            $order->representative_id = $representative->id;
+                            $count++;
+                            if($order->update(false)) {
+                                $count_orders++;
+                                $doubles[$order->patient->id][] = $order->representative_name;
+                            }
+                        }
+                        else {
+                            file_put_contents('info-log.txt', date('d.m.Y H:i:s').' errors - '.print_r($representative->errors, true)."\n", FILE_APPEND);
+                        }
+                    }
+                    else {
+                        if($representative = PatientRepresentative::find()->select(['id'])->where(['patient_id' => $order->patient->id, 'name' => $order->representative_name])->one()) {
+                            $order->representative_id = $representative->id;
+                        }
+
+                    }*/
+                }
+            }
+        }
+        $message = 'Успешно добавлено '.$count.' представителей и обновлено '.$count_orders.' заказов за '.(time() - $time_begin).' секунд';
+        file_put_contents('info-log.txt', date('d.m.Y H:i:s').' message - '.print_r($message, true)."\n", FILE_APPEND);
+        return $message;
+    }
+
+    public function actionAddRepresentativesOLD()
+    {
+        return true;
+        $count = 0;
+        $count_orders = 0;
+        $time_begin = time();
+        $doubles = [];
+        if($orders = Order::find()->where(['not', ['representative_name' => null]])->andWhere(['not', ['representative_name' => '']])->all()) {
+
+            foreach($orders as $order) {
+                if($order->patient) {
+                    $representative = PatientRepresentative::find()
+                        //->select(['id', 'patient_id'])
+                        ->where(['name' => $order->representative_name])
+                        ->one();
+                    if(!$representative) {
+
+                        $representative = new PatientRepresentative();
+                        $representative->patient_id = $order->patient->id;
+                        $representative->name = $order->representative_name;
+                        if($representative->save()) {
+                            $count++;
+                            $order->representative_id = $representative->id;
+                            if($order->save()) {
+                                $count_orders++;
+                            }
+                            else {
+                                file_put_contents('info-log.txt', date('d.m.Y H:i:s').' order errors 1 - '.print_r($order->errors, true)."\n", FILE_APPEND);
+                            }
+                        }
+
+                    }
+                    elseif($order->patient->id == $representative->patient_id) {
+                        $order->representative_id = $representative->id;
+                        if($order->save()) {
+                            $count_orders++;
+                        }
+                        else {
+                            file_put_contents('info-log.txt', date('d.m.Y H:i:s').' order errors 2 - '.print_r($order->errors, true)."\n", FILE_APPEND);
+                        }
+                    }
+
+
+
+
+
+
+
+
+
+                    /*if(!array_key_exists($order->patient->id, $doubles)) {
+                        $doubles[$order->patient->id] = [];
+                    }
+                    if(!in_array($order->representative_name, $doubles[$order->patient->id])) {
+                        $representative = new PatientRepresentative();
+                        $representative->patient_id = $order->patient->id;
+                        $representative->name = $order->representative_name;
+                        if($representative->save()) {
+                            file_put_contents('info-log.txt', date('d.m.Y H:i:s').' - '.print_r($count, true)."\n", FILE_APPEND);
+                            $order->representative_id = $representative->id;
+                            $count++;
+                            if($order->update(false)) {
+                                $count_orders++;
+                                $doubles[$order->patient->id][] = $order->representative_name;
+                            }
+                        }
+                        else {
+                            file_put_contents('info-log.txt', date('d.m.Y H:i:s').' errors - '.print_r($representative->errors, true)."\n", FILE_APPEND);
+                        }
+                    }
+                    else {
+                        if($representative = PatientRepresentative::find()->select(['id'])->where(['patient_id' => $order->patient->id, 'name' => $order->representative_name])->one()) {
+                            $order->representative_id = $representative->id;
+                        }
+
+                    }*/
+                }
+            }
+        }
+        $message = 'Успешно добавлено '.$count.' представителей и обновлено '.$count_orders.' заказов за '.(time() - $time_begin).' секунд';
+        file_put_contents('info-log.txt', date('d.m.Y H:i:s').' message - '.print_r($message, true)."\n", FILE_APPEND);
+        return $message;
+    }
+
 }
 

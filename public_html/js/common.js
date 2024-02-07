@@ -767,6 +767,93 @@ function displayProblemData() {
 }
 displayProblemData()
 
+$(document).on('change', '#order-patient_id', function(e) {
+    e.preventDefault();
+    let patient_id = $(this).val();
+    $.ajax({
+        url: '/patient/representative-dropdown-list',
+        type: 'POST',
+        data: {patient_id: patient_id},
+        success: function (res) {
+            console.log('res', res)
+            if(res.result == 1 && res.html != null) {
+                $('#representative-field').html(res.html)
+            }
+
+        },
+        error: function () {
+            alert('Error!');
+        }
+    });
+});
+
+$(document).on('click', '.btn-add-representative', function(e) {
+    e.preventDefault();
+    let patient_id = $(this).attr('data-id');
+    let representative_id = $(this).attr('data-representative');
+
+    $.ajax({
+        url: '/patient/representative-form',
+        type: 'POST',
+        data: {patient_id: patient_id, representative_id: representative_id},
+        success: function (res) {
+            console.log('res', res)
+            if(res.result == 1 && res.html != null) {
+                $('#representative-edit-form').html(res.html)
+            }
+            return false;
+        },
+        error: function () {
+            console.log('Error!');
+        }
+    });
+});
+
+$(document).on('click', '.btn-representative-save', function(e) {
+    e.preventDefault();
+    let form = $(this).closest('form');
+    let data = form.serialize()
+
+    $.ajax({
+        url: '/patient/representative-save',
+        type: 'POST',
+        data: data,
+        success: function (res) {
+            console.log('res', res)
+            if(res.result == 1 && res.html != null) {
+                $('.representative-form').replaceWith(res.html)
+            }
+            return false;
+        },
+        error: function () {
+            console.log('Error!');
+        }
+    });
+});
+
+$(document).on('click', '.representative-delete', function(e) {
+    e.preventDefault();
+    let representative_id = $(this).attr('data-id')
+    $.ajax({
+        url: '/patient/representative-delete',
+        type: 'POST',
+        data: {representative_id: representative_id},
+        success: function (res) {
+            console.log('res', res)
+            if(res.result == 1 && res.html != null) {
+                $('.representative-form').replaceWith(res.html)
+            }
+            return false;
+        },
+        error: function () {
+            console.log('Error!');
+        }
+    });
+});
+$(document).on('click', '.representative-edit-link', function(e) {
+    e.preventDefault();
+    console.log('yes')
+});
 
 
 
