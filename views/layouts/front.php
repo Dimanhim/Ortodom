@@ -32,6 +32,7 @@ $page = $this->context->actionParams['page'];
     <link rel="stylesheet" href="/design/css/style.min.css">
     <link rel="stylesheet" href="/bvi/css/bvi.min.css">
     <link rel="stylesheet" href="/design/css/main.css?v=<?= mt_rand(1000,10000) ?>">
+    <meta name="yandex-verification" content="b1c2672fc5e26b0b" />
 </head>
 <body>
 <?php $this->beginBody(); ?>
