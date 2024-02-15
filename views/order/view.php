@@ -226,6 +226,20 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                     //'value' => $model->statusName ? $model->statusName : '-',
                 ],
+                /*[
+                    'attribute' => 'История статусов',
+                    'format' => 'raw',
+                    'value' => function($data) {
+                        if($data->statusDates) {
+                            $str = '<ul>';
+                            foreach($data->statusDates as $orderStatus) {
+                                $str .= '<li>'.$orderStatus->status->name.' - '.date('d.m.Y H:i', $orderStatus->created_at).'</li>';
+                            }
+                            $str .= '</ul>';
+                            return $str;
+                        }
+                    }
+                ],*/
                 [
                     'attribute' => 'brand_id',
                     'value' => function($data) {

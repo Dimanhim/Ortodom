@@ -31,8 +31,10 @@ class Helpers
         return '';
     }
 
-    public static function formatPhone1($phone)
+    public static function formatPhone($phone)
     {
-
+        $symbols = [' ', '-'];
+        $replaced = ['', ''];
+        return str_replace($symbols, $replaced, $phone);
     }
 }

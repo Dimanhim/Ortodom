@@ -260,8 +260,10 @@ class ApiController extends Controller
             // статус Готов к выдаче
             ->andWhere(['order_status_dates.status_id' => 3])
             ->andWhere(['orders.status_id' => 3])
+            //->andWhere(['not beetween', 'order_status_dates.created_at', 1707166800,1707253200])
             //->andWhere('orders.status_date = order_status_dates.created_at')
             ->orderBy(['order_status_dates.order_id' => SORT_ASC])
+            //->limit(10)
             ->all();
 
         if($orderStatusDates) {
@@ -572,6 +574,30 @@ class ApiController extends Controller
         $message = 'Успешно добавлено '.$count.' представителей и обновлено '.$count_orders.' заказов за '.(time() - $time_begin).' секунд';
         file_put_contents('info-log.txt', date('d.m.Y H:i:s').' message - '.print_r($message, true)."\n", FILE_APPEND);
         return $message;
+    }
+
+    public function actionCloseOrders()
+    {
+        return true;
+        $deadline = strtotime('09.08.2023');
+
+        $orders = Order::find()->where(['<', 'accepted', date('Y-m-d', $deadline)])->andWhere(['status_id' => 3])->all();
+
+        echo 'Всего - '.count($orders).'<br>';
+        $count = 1;
+        foreach($orders as $order) {
+            /*$lastChangeStatus = $order->lastChangeStatus();
+            if($lastChangeStatus == '(06.02.2024)') {
+                echo $count.' '. $lastChangeStatus.' <br>';
+                $count++;
+            }*/
+
+            $order->status_id = 5;
+            if($order->save()) {
+                $count++;
+            }
+        }
+        echo 'Всего - '.$count;
     }
 
 }
