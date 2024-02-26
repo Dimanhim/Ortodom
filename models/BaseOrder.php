@@ -195,7 +195,7 @@ class BaseOrder extends \yii\db\ActiveRecord
         if($this->modelBrand) {
             return $this->modelBrand->name;
         }
-        return $this->model;
+        return $this->brand_data ?? $this->model;
     }
     public function getModelDataName()
     {

@@ -171,7 +171,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'representative_name',
                     'value' => function($data) {
-                        return $data->fullName;
+                        return $data->representativeName;
                     }
                 ],
                 'referral',

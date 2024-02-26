@@ -162,16 +162,7 @@ class JournalSearch extends Order
             $query->andFilterCompare('accepted', $endDate, '<=');
         }
         if($this->id) {
-            $ids = explode(',', $this->id);
-            if(count($ids) == 1) {
-                \Yii::$app->controller->redirect(['order/view', 'id' => $ids[0]]);
-            }
-            elseif(isset($ids[1]) && !$ids[1]) {
-                \Yii::$app->controller->redirect(['order/view', 'id' => $ids[0]]);
-            }
-            else {
-                $query->andFilterWhere(['in', 'id', explode(',', $this->id)]);
-            }
+            $query->andFilterWhere(['in', 'id', explode(',', $this->id)]);
         }
 
         // grid filtering conditions

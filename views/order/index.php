@@ -138,7 +138,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'contentOptions' => ['class' => 'fix-row'],
                     'headerOptions' => ['style' => 'width: 140px; white-space: break-spaces'],
                     'value' => function($data) {
-                        return $data->fullName;
+                        return $data->representativeName;
                     }
                 ],
                 [
