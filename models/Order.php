@@ -87,7 +87,7 @@ class Order extends BaseOrder
     {
         return [
             [['patient_id', 'accepted'], 'required'],
-            [['payment_id', 'status_id', 'status_date', 'patient_id', 'diagnosis_id', 'shoes_id', 'checkbox', 'appointment_left_id', 'appointment_right_id', 'prepaid_date', 'sms_yandex_review', 'sms_yandex_datetime', 'sms_yandex_result', 'sms_ready', 'representative_id', 'need_fitting'], 'integer'],
+            [['payment_id', 'status_id', 'status_date', 'patient_id', 'diagnosis_id', 'shoes_id', 'checkbox', 'appointment_left_id', 'appointment_right_id', 'prepaid_date', 'sms_yandex_review', 'sms_yandex_datetime', 'sms_yandex_result', 'sms_ready', 'representative_id', 'need_fitting', 'user_id'], 'integer'],
             [['accepted', 'issued', 'changeStatusForm', 'changeColorForm', 'highlightLine'], 'safe'],
             [['prepaid', 'cost'], 'number'],
             [['file'], 'file'],
@@ -119,6 +119,7 @@ class Order extends BaseOrder
     {
         return [
             'id' => '№',
+            'user_id' => 'Пользователь',
             'patient_id' => 'ФИО',
             'status_id' => 'Статус',
             'status_date' => 'Дата',
@@ -436,6 +437,9 @@ class Order extends BaseOrder
             if($this->status_id == 5) {
                 $this->issued = date('Y-m-d', time());
             }
+            if(!$this->user_id) {
+                $this->user_id = Yii::$app->user->id;
+            }
 
             if (!in_array($this->payment_id, [Payment::CASH, Payment::REDRESS, Payment::NR])) {
                 $this->prepaid = $this->cost = null;
@@ -450,6 +454,16 @@ class Order extends BaseOrder
     {
         $this->updateOrderStatusDate();
         return parent::afterSave($insert, $changedAttributes);
+    }
+
+    public function getUserName()
+    {
+        if($this->user_id) {
+            if($user = User::findIdentity($this->user_id)) {
+                return $user->smsName ?? null;
+            }
+        }
+        return false;
     }
     public function uploadScan()
     {
@@ -472,9 +486,31 @@ class Order extends BaseOrder
     {
         $visit = new Visit();
         if(($this->status_id == 11) && ($this->patient) && ($phone = $this->patient->phone)) {
-            $text = "Ваш заказ № {$this->id} к примерке готов! Ждем Вас по адресу: \nВыборгское шоссе 5/1 \nт.8(800)2227002\n Пн-Сб., с 10-20 ч., \nперерыв с 14-15ч.";
-            //$text_voice = "Ваш заказ ортопедической обуви готов к выдаче! Ждём Вас по адресу: Выборгское шоссе 5 дробь 1 Телефон для связи 8(800)2227002";
-            $text_voice = "Ваш заказ номер {$this->id} к примерке №{$this->countMeasure} готов. Ждём Вас по адресу: Выборгское шоссе 5 дробь 1 Телефон для связи 8(800)2227002 С понедельника по субботу с десяти до двадцати часов, перерыв с четырнадцати до пятнадцати часов.";
+            //$text = "Ваш заказ № {$this->id} к примерке готов! Ждем Вас по адресу: \nВыборгское шоссе 5/1 \nт.8(800)2227002\n Пн-Сб., с 10-20 ч., \nперерыв с 14-15ч.";
+            //$text_voice = "Ваш заказ номер {$this->id} к примерке №{$this->countMeasure} готов. Ждём Вас по адресу: Выборгское шоссе 5 дробь 1 Телефон для связи 8(800)2227002 С понедельника по субботу с десяти до двадцати часов, перерыв с четырнадцати до пятнадцати часов.";
+
+
+
+            $text = "Ваш заказ № {$this->id} к примерке №{$this->countMeasure} готов! ";
+            $text .= "Для примерки запишитесь к Вашему специалисту ";
+            if($this->userName) {
+                $text .= "- ".$this->userName.' ';
+            }
+            $text .= "по телефону т.8(800)2227002\n";
+            $text .= "После записи на примерку ждем Вас по адресу: \n";
+            $text .= "Выборгское шоссе 5/1 Пн-Сб., с 10-20 ч., перерыв 14-15ч.";
+
+            $text_voice = "Ваш заказ номер {$this->id} к примерке номер {$this->countMeasure} готов.";
+            $text_voice .= "Для примерки запишитесь к Вашему специалисту ";
+            if($this->userName) {
+                $text_voice .= $this->userName.' ';
+            }
+            $text_voice .= "по телефону 8(800)2227002 ";
+            $text_voice .= "После записи на примерку ждем Вас по адресу: ";
+            $text_voice .= "Выборгское шоссе 5 дробь 1 С понедельника по субботу с десяти до двадцати часов, перерыв с четырнадцати до пятнадцати часов.";
+
+
+
             //$phone = '+79887608134';
             $visit->sendSmsText($phone, $text);
             $visit->sendVoiceText($phone, $text_voice);
@@ -498,6 +534,7 @@ class Order extends BaseOrder
         }
         elseif(($this->status_id == 11) && ($this->patient) && ($phone = $this->patient->phone)) {
             $text = "Ваш заказ № {$this->id} к примерке №{$this->countMeasure} готов! Ждем Вас по адресу: \nВыборгское шоссе 5/1 \nт.8(800)2227002\n Пн-Сб., с 10-20 ч., \nперерыв с 14-15ч.";
+            //$text = "Ваш заказ № {$this->id} к примерке №{$this->countMeasure} готов! Для примерки запишитесь к Вашему специалисту - (Мария/Лазарь) по телефону т.8(800)2227002. \n Ждем Вас по адресу: \nВыборгское шоссе 5/1 \nт.8(800)2227002\n Пн-Сб., с 10-20 ч., \nперерыв с 14-15ч.";
             //$text_voice = "Ваш заказ ортопедической обуви готов к выдаче! Ждём Вас по адресу: Выборгское шоссе 5 дробь 1 Телефон для связи 8(800)2227002";
             $text_voice = "Ваш заказ номер {$this->id} к примерке готов. Ждём Вас по адресу: Выборгское шоссе 5 дробь 1 Телефон для связи 8(800)2227002 С понедельника по субботу с десяти до двадцати часов, перерыв с четырнадцати до пятнадцати часов.";
             //$phone = '+79887608134';

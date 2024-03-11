@@ -17,6 +17,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public $id;
     public $name;
     public $shortName;
+    public $smsName;
     public $cellClass;
     public $username;
     public $password;
@@ -29,6 +30,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
             'id' => '100',
             'name' => '',
             'shortName' => '',
+            'smsName' => '',
             'username' => 'admin',
             'password' => 'orto',
             'authKey' => 'test100key',
@@ -40,6 +42,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
             'id' => '200',
             'name' => '',
             'shortName' => '',
+            'smsName' => '',
             'username' => 'orto',
             'password' => 'ortodom',
             'authKey' => 'test200key',
@@ -51,6 +54,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
             'id' => '300',
             'name' => '',
             'shortName' => '',
+            'smsName' => '',
             'username' => 'manager',
             'password' => 'orto',
             'authKey' => 'test300key',
@@ -62,6 +66,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
             'id' => '400',
             'name' => 'Саакян Лазарь Артёмович',
             'shortName' => 'Саакян Л.А.',
+            'smsName' => 'Лазарь',
             'username' => 'sla',
             'password' => '1234',
             'authKey' => 'test400key',
@@ -73,6 +78,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
             'id' => '500',
             'name' => 'Устинова Мария Сергеевна',
             'shortName' => 'Устинова М.С.',
+            'smsName' => 'Мария',
             'username' => 'ums',
             'password' => '4321',
             'authKey' => 'test500key',
