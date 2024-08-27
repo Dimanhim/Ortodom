@@ -50,12 +50,21 @@ class Patient extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['full_name', 'birthday', 'address', 'phone', 'passport_data'], 'required'],
+            [['full_name', 'birthday', 'address', 'phone'], 'required'],
             [['birthday'], 'safe'],
             [['passport_data', 'problem_data'], 'string'],
             [['created_at', 'problem'], 'integer'],
             [['full_name', 'address', 'phone'], 'string', 'max' => 255],
         ];
+    }
+
+    public function requiredPassportData()
+    {
+        if(!$this->representative and !$this->passport_data) {
+            $this->addError('passport_data', 'Необходимо заполнить паспортные данные пациента');
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -122,8 +131,7 @@ class Patient extends \yii\db\ActiveRecord
             }
 
             $this->birthday = date('Y-m-d', strtotime($this->birthday));
-
-            return true;
+            return $this->requiredPassportData();
         }
 
         return false;
