@@ -47,7 +47,7 @@
             Модель
         </td>
         <td colspan="2" class="bt br">
-            <?= $order->modelName ?>
+            <?= $order->getModelContent() ?>
         </td>
         <td class="td-4">
 
@@ -64,7 +64,7 @@
             Подкладка
         </td>
         <td colspan="2" class="bt br">
-            <?= $order->modelLining ? $order->modelLining->name : '' ?>
+            <?= $order->getLiningContent() ?>
         </td>
         <td class="td-4">
 
@@ -81,7 +81,7 @@
             Верх обуви
         </td>
         <td colspan="2" class="bt br">
-            <?= $order->modelMaterial ? $order->modelMaterial->name : '' ?>
+            <?= $order->getMaterialContent() ?>
         </td>
         <td class="td-4">
 
@@ -115,7 +115,7 @@
             Подошва
         </td>
         <td colspan="2" class="bt bb br">
-            <?= $order->modelSole ? $order->modelSole->name : '' ?>
+            <?= $order->getSoleContent() ?>
         </td>
         <td class="td-4">
 

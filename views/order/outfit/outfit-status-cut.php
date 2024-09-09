@@ -28,13 +28,13 @@ $count = 1;
                         <?= $order->id ?>
                     </td>
                     <td>
-                        <?= $order->modelName ?>
+                        <?= $order->getModelContent() ?>
                     </td>
                     <td>
-                        <?= $order->modelLining ? $order->modelLining->name : '---' ?>
+                        <?= $order->getLiningContent() ?>
                     </td>
                     <td>
-                        <?= $order->modelMaterial ? $order->modelMaterial->name : '---' ?>
+                        <?= $order->getMaterialContent() ?>
                     </td>
                     <td class="color-row">
                         <?= $order->getColorDataName() ?>

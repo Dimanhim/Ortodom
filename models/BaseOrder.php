@@ -312,4 +312,32 @@ class BaseOrder extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Shoes::className(), ['id' => 'shoes_id']);
     }
+
+    public function getModelContent()
+    {
+        $content = $this->brand ? $this->brand->name : $this->model;
+        if($this->brand_data) $content .= ' ('.$this->brand_data.')';
+        return $content;
+    }
+
+    public function getLiningContent()
+    {
+        $content = $this->modelLining ? $this->modelLining->name : '---';
+        if($this->lining_data) $content .= ' ('.$this->lining_data.')';
+        return $content;
+    }
+
+    public function getMaterialContent()
+    {
+        $content = $this->modelMaterial ? $this->modelMaterial->name : '---';
+        if($this->material_data) $content .= ' ('.$this->material_data.')';
+        return $content;
+    }
+
+    public function getSoleContent()
+    {
+        $content = $this->modelSole ? $this->modelSole->name : $this->size;
+        if($this->sole_data) $content .= ' ('.$this->sole_data.')';
+        return $content;
+    }
 }
