@@ -11,6 +11,8 @@ use barcode\barcode\BarcodeGenerator;
 $this->title = 'Заказ №'.$model->getFullId(false);
 $this->params['breadcrumbs'][] = ['label' => 'Заказы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+echo $model->userName;
 ?>
 <div class="order-view">
 

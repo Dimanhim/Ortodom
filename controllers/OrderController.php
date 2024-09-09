@@ -104,14 +104,15 @@ class OrderController extends Controller
      * @return mixed
      * @throws BadRequestHttpException
      */
-    public function actionPrint($id, $data, $new = false)
+    public function actionPrint($id=null, $data, $new = false)
     {
+        $preparedData = $this->prepareOrderData($data);
         $view = '';
         if($id and ($orderIds = json_decode($id, true))) {
             if($orderIds['ids']) {
                 $i = 1;
                 foreach($orderIds['ids'] as $order_id) {
-                    $view .= $this->getOrderView($order_id, $data);
+                    $view .= $this->getOrderView($order_id, $preparedData);
                     $view .= ($i == count($orderIds['ids'])) ? '' : '<div style="page-break-after: always;"></div>';
                     $i++;
                 }
@@ -121,6 +122,26 @@ class OrderController extends Controller
         }
 
         throw new BadRequestHttpException();
+    }
+
+    // сейчас - print?id={"ids":["29507"]}&data={"type": [5,7]}
+    // нужно - print?data=[{"id":2020,"types":[5,7]},{"id":2023,"types":[10,12]}]
+    public function prepareOrderData($data)
+    {
+        return $data;
+        if($orderData = json_decode($data, true)) {
+            if(isset($orderData['id'])) {
+                if($order = Order::findOne($orderData['id'])) {
+                    if(isset($orderData['types']) and $orderData['types']) {
+                        // тут получаем ID типа для методов оплаты и возвращаем в новый массив
+                        // а для начала нужно научить выводить вьюхи из нового массива
+                        // и получать его скриптами
+                    }
+                }
+            }
+        }
+
+        return $data;
     }
 
     public function getOrderView($id, $data)
@@ -147,21 +168,29 @@ class OrderController extends Controller
                     break;
                 case PrintTypes::ACT:
                     $viewName = 'print/act';
+                    if($model->payment_id == 20)
+                        $viewName = 'print/act_lo_2024';
                     break;
-                case PrintTypes::ACT_LO:
+                case PrintTypes::ACT_LO: {
                     $viewName = 'print/act_lo';
+                }
                     break;
                 case PrintTypes::ACT_LO_2023:
                     $viewName = 'print/act_lo_2023';
                     break;
-                case PrintTypes::ACT_LO_2024:
+                case PrintTypes::ACT_LO_2024: {
                     $viewName = 'print/act_lo_2024';
+                }
                     break;
                 case PrintTypes::SALES_RECEIPT:
                     $viewName = 'print/sales_receipt';
                     break;
-                case PrintTypes::CONTRACT:
+                case PrintTypes::CONTRACT: {
                     $viewName = 'print/contract';
+
+                    if($model->payment_id == 20)
+                        $viewName = 'print/contract_lo';
+                }
                     break;
                 case PrintTypes::CONTRACT_LO:
                     $viewName = 'print/contract_lo';
