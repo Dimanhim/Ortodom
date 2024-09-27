@@ -99,12 +99,12 @@ class RecordController extends Controller
                 $new_model = new Visit();
             }
             $format_date = date('Y-m-d', strtotime($model->birthday));
-            if($patient = Patient::findOne($model->patient_id)) {
+            if($patient = Patient::getInstanceOfVisit($model)) {
                 $patient->full_name = $model->name;
                 $patient->phone = $model->phone;
-                $patient->birthday = $format_date ? $format_date : date('Y-m-d');
-                $patient->address = $model->address;
-                $patient->passport_data = $model->passport_data;
+                //$patient->birthday = $format_date ? $format_date : date('Y-m-d');
+                //$patient->address = $model->address;
+                //$patient->passport_data = $model->passport_data;
                 if($patient->save()) {
                     $new_model->patient_id = $patient->id;
                     $new_model->name = $model->name;
@@ -123,9 +123,9 @@ class RecordController extends Controller
                 $patient->insert_order = true;
                 $patient->full_name = $model->name;
                 $patient->phone = $model->phone;
-                $patient->birthday = $format_date ? $format_date : date('Y-m-d');
-                $patient->address = $model->address ? $model->address : '---';
-                $patient->passport_data = $model->passport_data ? $model->passport_data : '---';
+                $patient->birthday = $format_date ?? date('Y-m-d');
+                $patient->address = $model->address ?? '---';
+                $patient->passport_data = $model->passport_data ?? '---';
                 $new_model->name = $patient->full_name;
                 if($patient->save()) {
                     $new_model->patient_id = $patient->id;

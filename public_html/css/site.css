@@ -317,12 +317,21 @@ form.marked .required .no-mark-here .control-label:after{
     left: 5px;
     top: 5px;
 }
+.table-info {
+    font-size: 18px;
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 5px;
+}
 @media(max-width:767px) {
     .nav li > form > button.logout {
         display:block;
         text-align: left;
         width: 100%;
         padding: 10px 15px;
+    }
+    .cell-content-container {
+        font-size: 8px;
     }
 }
 @media(max-width:991px) {

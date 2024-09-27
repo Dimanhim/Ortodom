@@ -25,7 +25,7 @@ jQuery(function($){
         if(ids.length) {
             ids_json = {"ids": ids};
         }
-
+        
         if(ids.length)
         window.open('/order/print' + '?id=' + JSON.stringify(ids_json) + '&data=' + json);
     });

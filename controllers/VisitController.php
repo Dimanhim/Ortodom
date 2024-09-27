@@ -164,6 +164,9 @@ class VisitController extends Controller
                     $new_model->visit_date = strtotime($model->visit_date);
                     $new_model->visit_time = Calendar::getSecondsInTime($model->visit_time);
                     $new_model->reserved = $model->reserved;
+                    $new_model->is_insoles = $model->is_insoles;
+                    $new_model->is_children = $model->is_children;
+                    $new_model->is_fitting = $model->is_fitting;
                     if($new_model->save()) {
                         $new_model->sendMessage();
                         Yii::$app->session->setFlash('success', 'Сохранено успешно');
@@ -185,6 +188,9 @@ class VisitController extends Controller
                     $new_model->visit_date = strtotime($model->visit_date);
                     $new_model->visit_time = Calendar::getSecondsInTime($model->visit_time);
                     $new_model->reserved = $model->reserved;
+                    $new_model->is_insoles = $model->is_insoles;
+                    $new_model->is_children = $model->is_children;
+                    $new_model->is_fitting = $model->is_fitting;
                     if($new_model->save()) {
                         $new_model->sendMessage();
                         Yii::$app->session->setFlash('success', 'Сохранено успешно');

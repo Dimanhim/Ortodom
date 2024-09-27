@@ -16,7 +16,7 @@ $user = Yii::$app->user->identity;
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style>
         body { width: 210mm; margin-left: auto; margin-right: auto; border: 1px #efefef solid; font-size: 11pt;}
-        p {margin-top: 0.5em; margin-bottom: 1em;}
+        p {margin-top: 0.5em; margin-bottom: 0.5em;}
         p.text {font-size: 11pt;}
         li{margin:10px;}
     </style>
@@ -41,10 +41,9 @@ $user = Yii::$app->user->identity;
     </tbody>
 </table>
 
-<br>
 <span style="font-weight:bold;font-size:18pt;">&nbsp;&nbsp;  МЕДИЦИНСКИЙ ЗАКАЗ № <?= $model->getFullId() ?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:17pt;">Ф/О: <strong><?= $model->payment->nameValue ?></strong></span>
 <br>
-<table style="width: 100%;">
+<table style="width: 100%">
     <tr>
         <td>
             <ol class="form-list">
@@ -116,7 +115,8 @@ $user = Yii::$app->user->identity;
                 ?>
                 <li>
                     Цвет:
-                    <span class="dop-data"><?= $modelColor ?></span>
+                    <span class="dop-data"><?= $modelColor ?></span><br>
+                    <span class="li-tip-text">Оттенок цвета кожи может отличаться в зависимости от партии</span>
                 </li>
                 <?php
                     $modelSole = $model->modelSole ? $model->modelSole->name : $model->size;
@@ -126,7 +126,8 @@ $user = Yii::$app->user->identity;
                 ?>
                 <li>
                     Подошва/размер:
-                    <span class="dop-data"><?= $modelSole ?></span>
+                    <span class="dop-data"><?= $modelSole ?></span><br>
+                    <span class="li-tip-text">Вид подошвы может быть изменен, в зависимости от параметров стопы</span>
                 </li>
                 <?php
                     $modelLast = $model->last_id ? $model->getOptionName('last_id') : $model->block;
@@ -153,10 +154,7 @@ $user = Yii::$app->user->identity;
         Диагноз и назначения: <?= $model->diagnosis->name ?>
     </span>
 </p>
-
-<br/>
-<div><hr></div>
-<br/>
+<div style="padding: 5px 0"><hr></div>
 <br/>
 <table width="100%" border="1">
     <tbody>
@@ -177,16 +175,16 @@ $user = Yii::$app->user->identity;
             </td>
         </tr>
         <tr>
-            <td style="padding: 5px; border-top: 1px solid #ccc; height: 30px">
+            <td style="padding: 5px; border-top: 1px solid #ccc; height: 20px">
 
             </td>
-            <td style="padding: 5px; border-top: 1px solid #ccc; height: 30px">
+            <td style="padding: 5px; border-top: 1px solid #ccc; height: 20px">
 
             </td>
         </tr>
     </tbody>
 </table>
-<br/>
+
 <table width="100%" >
     <tbody>
     <tr >
@@ -194,7 +192,7 @@ $user = Yii::$app->user->identity;
 
         <?php if($user->shortName) : ?>
         <td align="center">
-            <p><div style="font-weight: bold; font-size: 16pt; width:100%;">Прием заказа: <br/></div><br>
+            <p><div style="font-weight: bold; font-size: 16pt; width:100%;padding-bottom: 5px;">Прием заказа: <br/></div>
             «<?= date('d', $acceptTime) ?>» <?= Yii::$app->formatter->asDate($acceptTime, 'MMMM') ?> <?= date('Y', $acceptTime) ?>г.
             </p>
 
@@ -218,7 +216,7 @@ $user = Yii::$app->user->identity;
 
 
         <td align="center">
-            <p><div style="font-weight: bold; font-size: 16pt; width:100%;">Прием заказа: <br/></div><br>
+            <p><div style="font-weight: bold; font-size: 16pt; width:100%;padding-bottom: 5px;">Прием заказа: <br/></div>
             «<?= date('d', $acceptTime) ?>» <?= Yii::$app->formatter->asDate($acceptTime, 'MMMM') ?> <?= date('Y', $acceptTime) ?>г.
             </p>
 
@@ -241,7 +239,7 @@ $user = Yii::$app->user->identity;
 
 
         <td align="center">
-            <p><div style="font-weight: bold; font-size: 16pt; width:100%;">Выдача заказа: <br/></div><br>
+            <p><div style="font-weight: bold; font-size: 16pt; width:100%;padding-bottom: 5px;">Выдача заказа: <br/></div>
             <?php if ($issuedTime > -1): ?>
                 «<?= date('d', $issuedTime) ?>» <?= Yii::$app->formatter->asDate($issuedTime, 'MMMM') ?> <?= date('Y', $issuedTime) ?>г.
             <?php else: ?>
@@ -266,8 +264,8 @@ $user = Yii::$app->user->identity;
 </table>
 <style>
     .form-list {
-        font-size:15pt;
-        margin-bottom: 40px;
+        font-size:14pt; 
+        line-height: 14pt;
     }
     .form-list span.dop-data
     /*.form-list span, .appointments-text*/
@@ -278,6 +276,10 @@ $user = Yii::$app->user->identity;
     .form-list span.form-phone-text, .appointments-text {
         color: #d9534f;
         font-weight: bold
+    }
+    .li-tip-text {
+        font-size: 10pt;
+        line-height: 10pt;
     }
 </style>
 </body>

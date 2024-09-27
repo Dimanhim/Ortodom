@@ -346,7 +346,7 @@ class Order extends BaseOrder
         $arr = self::getOrderStatusesArray('styles');
         /*$arr = [
             0 => 'background: transparent;',
-            1 => 'background: #d6d813;',
+            1 => 'background: #e6f6c7;',
             2 => 'background: #FCB322;',
             3 => 'background: #098d1c; color: #fff !important',
             4 => 'background: #b90a2f; color: #fff !important',
@@ -373,7 +373,7 @@ class Order extends BaseOrder
 
         return [
             0 => 'background: transparent;',
-            1 => 'background: #d6d813;',
+            1 => 'background: #e6f6c7;',
             2 => 'background: #FCB322;',
             3 => 'background: #098d1c; color: #fff',
             4 => 'background: #b90a2f; color: #fff',
@@ -882,6 +882,9 @@ class Order extends BaseOrder
     {
         if($this->representative) {
             return $this->representative->passport_data;
+        }
+        if($this->patient->representative) {
+            return $this->patient->representative->passport_data;
         }
         $this->patient->passport_data;
     }

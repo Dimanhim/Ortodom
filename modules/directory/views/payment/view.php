@@ -30,6 +30,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
+            [
+                'attribute' => 'showInSelectList',
+                'format' => 'raw',
+                'value' => function($data){
+                    return $data->showInSelectList ? 'Да' : 'Нет';
+                }
+            ],
         ],
     ]); ?>
 

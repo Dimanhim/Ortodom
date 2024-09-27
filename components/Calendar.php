@@ -160,11 +160,28 @@ class Calendar extends Model
     {
         $time = $this->getSecondsInTime($time);
         if($visit = Visit::findOne(['visit_time' => $time, 'visit_date' => $date])) {
-            return $id ? $visit->id : $visit->name.'<br>'.$visit->phone;
+            if($id) {
+                return $visit->id;
+            }
+            $str = $visit->name.'<br>';
+            if($visit->is_insoles) $str .= '<span class="table-info">С</span>';
+            if($visit->is_children) $str .= '<span class="table-info">Д</span>';
+            if($visit->is_fitting) $str .= '<span class="table-info">П</span>';
+            $str .= $visit->phone;
+            return $str;
 
         }
         elseif($time == $this->getSecondsInTime('19:15') && ($visit = Visit::findOne(['visit_time' => $time + 15 * 60, 'visit_date' => $date]))) {
 
+            if($id) {
+                return $visit->id;
+            }
+            $str = $visit->name.'<br>';
+            if($visit->is_insoles) $str .= '<span class="table-info">С</span>';
+            if($visit->is_children) $str .= '<span class="table-info">Д</span>';
+            if($visit->is_fitting) $str .= '<span class="table-info">П</span>';
+            $str .= $visit->phone;
+            return $str;
             return $id ? $visit->id : $visit->name.'<br>'.$visit->phone;
         }
         return '';

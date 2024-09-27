@@ -613,10 +613,11 @@ $('body').on('click', '#print-order-to-send', function(e) {
 });
 
 $(document).ready(function() {
-    $("#form-order").on("keypress", function(e) {
+    $("#form-order").on("keypress", function(e) {        
         var text = $('#ordersearch-id').val();
         if (e.keyCode == 13) {
-            $('#ordersearch-id').val(text + ',');
+            //$('#ordersearch-id').val(text + ',');
+            $('#ordersearch-id').val(text);
             return false;
         }
     });
@@ -812,7 +813,9 @@ $(document).on('click', '.btn-add-representative', function(e) {
 $(document).on('click', '.btn-representative-save', function(e) {
     e.preventDefault();
     let form = $(this).closest('form');
-    let data = form.serialize()
+    let data = form.serialize();
+    //let buttonMain = document.getElementById('button-main');
+    //console.log(data);    
 
     $.ajax({
         url: '/patient/representative-save',
@@ -821,14 +824,15 @@ $(document).on('click', '.btn-representative-save', function(e) {
         success: function (res) {
             console.log('res', res)
             if(res.result == 1 && res.html != null) {
-                $('.representative-form').replaceWith(res.html)
+                $('.representative-form').replaceWith(res.html);               
             }
             return false;
         },
         error: function () {
             console.log('Error!');
         }
-    });
+    });     
+    //buttonMain.click(); 
 });
 
 $(document).on('click', '.representative-delete', function(e) {

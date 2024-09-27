@@ -165,7 +165,7 @@ $issuedTime = strtotime($model->issued);
                         <p><em><strong>ЗАКАЗЧИК/ПРЕДСТАВИТЕЛЬ:</strong></em> </p>
                         <p>Ф.И.О. <?= $model->fullName ?><br>
                             Зарегистрирован: <?= $model->patient->address ?><br>
-                            Паспортные данные <?= $model->patient->passport_data ?><br>
+                            Паспортные данные <?= $model->passportData ?><br>
                             Тел. <?= $model->patient->phone ?></p>
                         <br>
                         <div> _____________ (<?= $model->fullName ?>)</div>

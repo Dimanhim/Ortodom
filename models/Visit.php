@@ -61,7 +61,7 @@ class Visit extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'phone', 'visit_date', 'visit_time'], 'required'],
-            [['patient_id', 'send_reminder_sms', 'send_reminder_day_sms', 'reserved'], 'integer'],
+            [['patient_id', 'send_reminder_sms', 'send_reminder_day_sms', 'reserved', 'is_insoles', 'is_children', 'is_fitting'], 'integer'],
             [['name', 'phone'], 'string', 'max' => 255],
             [['visit_date', 'visit_time', 'birthday', 'address', 'passport_data', 'model_id', 'created_at', 'updated_at'], 'safe'],
         ];
@@ -93,6 +93,9 @@ class Visit extends \yii\db\ActiveRecord
             'visit_time' => 'Время',
             'patient_id' => 'Пациент',
             'reserved' => 'Бронь',
+            'is_insoles' => 'Стельки',
+            'is_children' => 'Дети',
+            'is_fitting' => 'Примерка',
             'send_reminder_sms' => 'Смс с напоминанием',
             'send_reminder_day_sms' => 'Смс с напоминанием за сутки',
         ];

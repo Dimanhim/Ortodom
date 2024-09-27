@@ -27,6 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['class' => 'yii\grid\SerialColumn'],
 
                 'name',
+                [
+                    'attribute' => 'showInSelectList',
+                    'format' => 'raw',
+                    'value' => function($data){
+                        return $data->showInSelectList ? 'Да' : 'Нет';
+                    }
+                ],
 
                 ['class' => 'yii\grid\ActionColumn'],
             ],

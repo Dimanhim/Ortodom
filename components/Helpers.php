@@ -37,4 +37,21 @@ class Helpers
         $replaced = ['', ''];
         return str_replace($symbols, $replaced, $phone);
     }
+
+    public static function setBasePhoneFormat($phone)
+    {
+        $pattern = '/[^0-9]/';
+        $phoneNumber = '';
+        $str = preg_replace($pattern, '', $phone);
+        if(mb_strlen($str) == 11) {
+            $phoneNumber .= '+';
+            $phoneNumber .= $str[0];
+            $phoneNumber .= '-';
+            $phoneNumber .= $str[1].$str[2].$str[3].'-';
+            $phoneNumber .= $str[4].$str[5].$str[6].'-';
+            $phoneNumber .= $str[7].$str[8].'-';
+            $phoneNumber .= $str[9].$str[10];
+        }
+        return $phoneNumber;
+    }
 }

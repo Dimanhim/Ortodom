@@ -17,6 +17,7 @@ namespace app\modules\directory\models;
  *
  * @property int $id
  * @property string $name
+ * @property string $showInSelectList
  */
 class Payment extends \yii\db\ActiveRecord
 {
@@ -41,6 +42,8 @@ class Payment extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['name'], 'string', 'max' => 255],
+            [['showInSelectList'], 'required'],
+            [['showInSelectList'], 'string', 'max' => 255],
         ];
     }
 
@@ -52,6 +55,7 @@ class Payment extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Название',
+            'showInSelectList' => 'Показать в выпадающем списке',
         ];
     }
 

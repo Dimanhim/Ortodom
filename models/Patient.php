@@ -189,5 +189,19 @@ class Patient extends \yii\db\ActiveRecord
         return ArrayHelper::map($this->representatives, 'id', 'name');
     }
 
+    public function getInstanceOfVisit(Visit $visit)
+    {
+        if($visit->patient_id) {
+            if($patient = Patient::findOne($visit->patient_id)) return $patient;
+        }
+
+        if($visit->phone) {
+            if($patient = Patient::findOne(['phone' => $visit->phone])) return $patient;
+            if($patient = Patient::findOne(['phone' => Helpers::setBasePhoneFormat($visit->phone)])) return $patient;
+        }
+
+        return false;
+    }
+
 
 }

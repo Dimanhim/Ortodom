@@ -60,8 +60,17 @@ use app\models\Patient;
                         <p class="error"></p>
                     </div>
                     <?php if(!Yii::$app->user->isGuest) : ?>
-                    <div class="form-group">
-                        <?= $form->field($model, 'reserved')->checkbox() ?>
+                    <div class="form-group row">
+                        <div class="col-md-3"><?= $form->field($model, 'reserved')->checkbox() ?></div>
+                        <div class="col-md-3"><?= $form->field($model, 'is_insoles')->checkbox() ?></div>
+                        <div class="col-md-3"><?= $form->field($model, 'is_children')->checkbox() ?></div>
+                        <div class="col-md-3"><?= $form->field($model, 'is_fitting')->checkbox() ?></div>
+                    </div>
+                    <div class="">
+
+
+
+
                     </div>
                     <?php endif; ?>
                     <?//= $form->field($model, 'visit_date', ['template' => '{input}'])->hiddenInput() ?>

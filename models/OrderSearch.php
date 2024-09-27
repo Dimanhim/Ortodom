@@ -148,7 +148,7 @@ class OrderSearch extends Order
             ->andFilterWhere(['like', 'model', $this->model])
             ->andFilterWhere(['like', 'color', $this->color])
             ->andFilterWhere(['like', 'size', $this->size]);
-
+        
         return $returnDataProvider ? $dataProvider : $query->all();
     }
 }
