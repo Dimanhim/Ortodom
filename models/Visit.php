@@ -153,7 +153,7 @@ class Visit extends \yii\db\ActiveRecord
      */
     public function getSendSmsOrder()
     {
-        $full_text = 'Вы записались на прием '.date('d.m.Y', $this->visit_date).' в '.Calendar::getTimeAsString($this->visit_time).". \nЖдем Вас по адресу: \nВыборгское шоссе 5/1 \n 8(800)2227002";
+        $full_text = 'Вы записались на прием '.date('d.m.Y', $this->visit_date).' в '.Calendar::getTimeAsString($this->visit_time).". \nЖдем Вас по адресу: \nВыборгское шоссе 5/1 \n 8(800)2227002\n".Yii::$app->params['navigator'];
         $this->sendSMS($this->phone, $full_text);
         return true;
     }
