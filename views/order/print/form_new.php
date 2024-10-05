@@ -243,7 +243,7 @@ $user = Yii::$app->user->identity;
             <?php if ($issuedTime > -1): ?>
                 «<?= date('d', $issuedTime) ?>» <?= Yii::$app->formatter->asDate($issuedTime, 'MMMM') ?> <?= date('Y', $issuedTime) ?>г.
             <?php else: ?>
-                «_____ »________________ 201___г.
+                «_____ »________________ 20____г.
             <?php endif ?>
             </p>
 
@@ -264,7 +264,7 @@ $user = Yii::$app->user->identity;
 </table>
 <style>
     .form-list {
-        font-size:14pt; 
+        font-size:14pt;
         line-height: 14pt;
     }
     .form-list span.dop-data

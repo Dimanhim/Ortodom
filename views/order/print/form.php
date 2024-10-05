@@ -146,7 +146,7 @@ $issuedTime = strtotime($model->issued);
             <?php if ($issuedTime > -1): ?>
                 «<?= date('d', $issuedTime) ?>» <?= Yii::$app->formatter->asDate($issuedTime, 'MMMM') ?> <?= date('Y', $issuedTime) ?>г.
             <?php else: ?>
-                «_____ »________________ 201___г.
+                «_____ »________________ 20____г.
             <?php endif ?>
             </p>
 
